@@ -14,6 +14,10 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
+    //PER PRODUCCIÓ
+    //.setPublicPath('/home/a18ismaitoug/public_html/projectefinal/public/build')
+    //.setManifestKeyPrefix('build')
+
     /*
      * ENTRY CONFIG
      *
