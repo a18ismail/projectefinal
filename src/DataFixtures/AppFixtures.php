@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Employee;
+use App\Entity\EmployeeHasOperation;
 use App\Entity\Operation;
 use App\Entity\Port;
 use App\Entity\Supervisor;
@@ -40,11 +41,12 @@ class AppFixtures extends Fixture
             $operativa->setTitle($title)
                 ->setType($type)
                 ->setCode($code)
-                ->setPortCode($portCode)
                 ->setDateStart($dateStart)
                 ->setDateEnd($dateEnd)
                 ->setHourlyPay($hourlyPay)
-                ->setPort($portBCN);
+                ->setPort($portBCN)
+                ->setDescription('Aquesta es una descripció de prova! Aqui hi anirá una descripció
+                                                detallada de la operativa.');
             $manager->persist($operativa);
         }
 
@@ -52,41 +54,50 @@ class AppFixtures extends Fixture
         $operativa01->setTitle('Encarregat de Check-out de passatgers')
             ->setType('Personal portuari')
             ->setCode('PRC01')
-            ->setPortCode('BCNESP')
             ->setDateStart(new \DateTime('@'.strtotime('now')))
-            ->setDateEnd(new \DateTime('@'.strtotime('now')))
+            ->setDateEnd(new \DateTime('@'.strtotime('+2 hours')))
             ->setHourlyPay(15.9)
-            ->setPort($portBCN);
+            ->setPort($portBCN)
+            ->setDescription('Aquesta es una descripció de prova! Aqui hi anirá una descripció
+                                                detallada de la operativa.');
 
         $operativa02 = new Operation();
         $operativa02->setTitle('Rebuda de passatgers')
             ->setType('Personal portuari')
             ->setCode('PRC02')
-            ->setPortCode('BCNESP')
-            ->setDateStart(new \DateTime('@'.strtotime('now')))
-            ->setDateEnd(new \DateTime('@'.strtotime('now')))
+            ->setDateStart(new \DateTime('@'.strtotime('+2 days')))
+            ->setDateEnd(new \DateTime('@'.strtotime('+2 hours')))
             ->setHourlyPay(15.9)
-            ->setPort($portBCN);
+            ->setPort($portBCN)
+            ->setDescription('Aquesta es una descripció de prova! Aqui hi anirá una descripció
+                                                detallada de la operativa.');
 
         $operativa03 = new Operation();
         $operativa03->setTitle('Desk Assistant')
             ->setType('Personal portuari')
             ->setCode('PRC03')
-            ->setPortCode('BCNESP')
-            ->setDateStart(new \DateTime('@'.strtotime('now')))
-            ->setDateEnd(new \DateTime('@'.strtotime('now')))
+            ->setDateStart(new \DateTime('@'.strtotime('+10 days')))
+            ->setDateEnd(new \DateTime('@'.strtotime('+2 hours')))
             ->setHourlyPay(10)
-            ->setPort($portBCN);
+            ->setPort($portBCN)
+            ->setDescription('Aquesta es una descripció de prova! Aqui hi anirá una descripció
+                                                detallada de la operativa.');
 
         $operativa04 = new Operation();
         $operativa04->setTitle('Ajudant de guardamolls')
             ->setType('Personal portuari')
             ->setCode('PRC04')
-            ->setPortCode('BCNESP')
-            ->setDateStart(new \DateTime('@'.strtotime('now')))
-            ->setDateEnd(new \DateTime('@'.strtotime('now')))
+            ->setDateStart(new \DateTime('@'.strtotime('+1 day')))
+            ->setDateEnd(new \DateTime('@'.strtotime('+2 hours')))
             ->setHourlyPay(10)
-            ->setPort($portBCN);
+            ->setPort($portBCN)
+            ->setDescription('Aquesta es una descripció de prova! Aqui hi anirá una descripció
+                                                detallada de la operativa.');
+
+        $manager->persist($operativa01);
+        $manager->persist($operativa02);
+        $manager->persist($operativa03);
+        $manager->persist($operativa04);
 
         //Creació de Employees
         $numEmployees = 5;
@@ -122,16 +133,32 @@ class AppFixtures extends Fixture
                 ->setSnsLinkedin($sns_linkedin);
             $manager->persist($employee);
 
-            $operativa01->addEmployee($employee);
-            $operativa02->addEmployee($employee);
-            $operativa03->addEmployee($employee);
-            $operativa04->addEmployee($employee);
-        }
+            $addOperationToEmployee01 = new EmployeeHasOperation();
+            $addOperationToEmployee01->setEmployee($employee);
+            $addOperationToEmployee01->setOperation($operativa01);
+            $addOperationToEmployee01->setStatus('confirmed');
 
-        $manager->persist($operativa01);
-        $manager->persist($operativa02);
-        $manager->persist($operativa03);
-        $manager->persist($operativa04);
+            $addOperationToEmployee02 = new EmployeeHasOperation();
+            $addOperationToEmployee02->setEmployee($employee);
+            $addOperationToEmployee02->setOperation($operativa02);
+            $addOperationToEmployee02->setStatus('confirmed');
+
+            $addOperationToEmployee03 = new EmployeeHasOperation();
+            $addOperationToEmployee03->setEmployee($employee);
+            $addOperationToEmployee03->setOperation($operativa03);
+            $addOperationToEmployee03->setStatus('confirmed');
+
+            $addOperationToEmployee04 = new EmployeeHasOperation();
+            $addOperationToEmployee04->setEmployee($employee);
+            $addOperationToEmployee04->setOperation($operativa04);
+            $addOperationToEmployee04->setStatus('reserved');
+
+            $manager->persist($addOperationToEmployee01);
+            $manager->persist($addOperationToEmployee02);
+            $manager->persist($addOperationToEmployee03);
+            $manager->persist($addOperationToEmployee04);
+
+        }
 
         $manager->flush();
     }

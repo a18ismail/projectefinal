@@ -35,6 +35,8 @@
             </section>
 
             {# EN AQUEST SECTION VA EL CONTINGUT DEL CONTAINER PRINCIPAL #}
+            {# TODO
+            TRANSLATE TABLE CONTENT https://datatables.net/examples/basic_init/language.html #}
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -42,7 +44,10 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Llista d'Operatives Assignades</h3>
+                                    <h3 class="card-title">Llistat d'Operatives</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                                    </div>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -51,25 +56,34 @@
                                         <tr>
                                             <th>Codi</th>
                                             <th>Titol</th>
-                                            <th>Tipus</th>
                                             <th>Data d'inici</th>
-                                            <th>Port</th>
+                                            <th>Estat</th>
+                                            <th>Detalls</th>
                                         </tr>
                                         </thead>
                                         <tbody>
 
-                                        {% for operation in employee.operations %}
+                                        {% for relation in employee.employeeHasOperations %}
                                             <tr>
-                                                <td><a data="{{ operation.code }}"> {{ operation.code }} </a> </td>
-                                                <td>{{ operation.title }}</td>
-                                                <td>{{ operation.type }}</td>
-                                                <td>{{ operation.dateStart|date("m/d/Y") }}</td>
-                                                <td> <a> {{ operation.port.code }} </a> </td>
+                                                <td>{{ relation.operation.code }}</td>
+                                                <td>{{ relation.operation.title }}</td>
+                                                <td>{{ relation.operation.dateStart|date("d/m/Y") }}</td>
+                                                <td>
+                                                    {% if relation.status == 'confirmed' %}
+                                                        Assignada
+                                                    {% elseif relation.status == 'reserved' %}
+                                                        Reservada
+                                                    {% else %}
+                                                        Disponible
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    <button type="button" data="{{ relation.operation.code }}" id="btn-{{ relation.operation.code }}" class="btn btn-primary"> Detalls </button>
+                                                </td>
                                             </tr>
                                         {% endfor %}
 
                                         </tbody>
-
                                     </table>
                                 </div>
                                 <!-- /.card-body -->
@@ -82,15 +96,13 @@
                 </div>
                 <!-- /.container-fluid -->
 
-                {% for  operation in employee.operations %}
-                    {{ include('/modals/operationDetail.html.twig', {'operation': operation}) }}
+                {% for  relation in employee.employeeHasOperations %}
+                    {{ include('/modals/operationDetail.html.twig', {'relation': relation}) }}
                 {% endfor %}
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-
-
 
         {% block javascripts %}
             {{ encore_entry_script_tags('operations') }}

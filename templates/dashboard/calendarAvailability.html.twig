@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Calendari Disponibilitat - App{% endblock %}
+{% block title %}Calendari Operatives - App{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('calendarOperations') }}
+{% endblock %}
 
 {% block body %}
     <div class="wrapper">
@@ -30,9 +34,44 @@
             </div>
             <!-- /.content-header -->
 
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="sticky-top mb-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Draggable Events</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- the events -->
+                                        <div id="external-events">
+                                            <div class="external-event bg-success">Temps disponible</div>
+                                            <div class="external-event bg-warning">Vacances</div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
 
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-9">
+                            <div class="card card-primary">
+                                <div class="card-body p-0">
+                                    <!-- THE CALENDAR -->
 
-
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
         </div>
         <!-- /.content-wrapper -->
 
@@ -40,4 +79,8 @@
         {{ include('footers/footerDashboard.html.twig') }}
     </div>
     <!-- ./wrapper -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('calendarOperations') }}
 {% endblock %}

@@ -1,4 +1,3 @@
-
 //ASSETS CSS
 
 //IMPORTACIONS CSS PLUGINS
@@ -40,17 +39,16 @@ $(document).ready(function() {
         "lengthChange": true,
     });
 
-    var table = $('#operationsList').DataTable();
-
-    $('#operationsList a').on('click', function () {
+    $('#operationsList > tbody  > tr > td > button').each(function(index, tr) {
         var id = $(this).attr('data');
-        //$( id ).modal('toggle');
-    } );
+        $(this).click(function() {
+            $('#'+id).modal('show');
+        });
+        console.log(id);
+    });
 } );
 
 $(function () {
-
-
     /*$('#example2').DataTable({
         "paging": true,
         "lengthChange": false,

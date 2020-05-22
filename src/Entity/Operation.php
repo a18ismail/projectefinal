@@ -25,11 +25,6 @@ class Operation
     private $code;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $portCode;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $dateStart;
@@ -50,11 +45,6 @@ class Operation
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Employee::class, inversedBy="operations")
-     */
-    private $employees;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -69,9 +59,15 @@ class Operation
      */
     private $port;
 
+    /**
+     * @ORM\OneToMany(targetEntity=EmployeeHasOperation::class, mappedBy="operation")
+     */
+    private $operationHasEmployee;
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
+        $this->operationHasEmployee = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -87,18 +83,6 @@ class Operation
     public function setCode(string $code): self
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    public function getPortCode(): ?string
-    {
-        return $this->portCode;
-    }
-
-    public function setPortCode(string $portCode): self
-    {
-        $this->portCode = $portCode;
 
         return $this;
     }
@@ -151,32 +135,6 @@ class Operation
         return $this;
     }
 
-    /**
-     * @return Collection|Employee[]
-     */
-    public function getEmployees(): Collection
-    {
-        return $this->employees;
-    }
-
-    public function addEmployee(Employee $employee): self
-    {
-        if (!$this->employees->contains($employee)) {
-            $this->employees[] = $employee;
-        }
-
-        return $this;
-    }
-
-    public function removeEmployee(Employee $employee): self
-    {
-        if ($this->employees->contains($employee)) {
-            $this->employees->removeElement($employee);
-        }
-
-        return $this;
-    }
-
     public function getTitle(): ?string
     {
         return $this->title;
@@ -209,6 +167,37 @@ class Operation
     public function setPort(?Port $port): self
     {
         $this->port = $port;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|EmployeeHasOperation[]
+     */
+    public function getOperationHasEmployee(): Collection
+    {
+        return $this->operationHasEmployee;
+    }
+
+    public function addOperationHasEmployee(EmployeeHasOperation $operationHasEmployee): self
+    {
+        if (!$this->operationHasEmployee->contains($operationHasEmployee)) {
+            $this->operationHasEmployee[] = $operationHasEmployee;
+            $operationHasEmployee->setOperation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOperationHasEmployee(EmployeeHasOperation $operationHasEmployee): self
+    {
+        if ($this->operationHasEmployee->contains($operationHasEmployee)) {
+            $this->operationHasEmployee->removeElement($operationHasEmployee);
+            // set the owning side to null (unless already changed)
+            if ($operationHasEmployee->getOperation() === $this) {
+                $operationHasEmployee->setOperation(null);
+            }
+        }
 
         return $this;
     }

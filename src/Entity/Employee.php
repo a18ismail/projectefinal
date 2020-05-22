@@ -20,12 +20,12 @@ class Employee
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=true)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=true)
      */
     private $surnames;
 
@@ -85,14 +85,15 @@ class Employee
     private $postcode;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Operation::class, mappedBy="employees")
+     * @ORM\OneToMany(targetEntity=EmployeeHasOperation::class, mappedBy="employee")
      */
-    private $operations;
+    private $employeeHasOperations;
 
     public function __construct()
     {
-        $this->operations = new ArrayCollection();
+        $this->employeeHasOperations = new ArrayCollection();
     }
+
 
     //birthday, address, postcode, nss, notes, sns_twitter, sns_linkedin
     public function getId(): ?int
@@ -257,30 +258,34 @@ class Employee
     }
 
     /**
-     * @return Collection|Operation[]
+     * @return Collection|EmployeeHasOperation[]
      */
-    public function getOperations(): Collection
+    public function getEmployeeHasOperations(): Collection
     {
-        return $this->operations;
+        return $this->employeeHasOperations;
     }
 
-    public function addOperation(Operation $operation): self
+    public function addEmployeeHasOperation(EmployeeHasOperation $employeeHasOperation): self
     {
-        if (!$this->operations->contains($operation)) {
-            $this->operations[] = $operation;
-            $operation->addEmployee($this);
+        if (!$this->employeeHasOperations->contains($employeeHasOperation)) {
+            $this->employeeHasOperations[] = $employeeHasOperation;
+            $employeeHasOperation->setEmployee($this);
         }
 
         return $this;
     }
 
-    public function removeOperation(Operation $operation): self
+    public function removeEmployeeHasOperation(EmployeeHasOperation $employeeHasOperation): self
     {
-        if ($this->operations->contains($operation)) {
-            $this->operations->removeElement($operation);
-            $operation->removeEmployee($this);
+        if ($this->employeeHasOperations->contains($employeeHasOperation)) {
+            $this->employeeHasOperations->removeElement($employeeHasOperation);
+            // set the owning side to null (unless already changed)
+            if ($employeeHasOperation->getEmployee() === $this) {
+                $employeeHasOperation->setEmployee(null);
+            }
         }
 
         return $this;
     }
+
 }

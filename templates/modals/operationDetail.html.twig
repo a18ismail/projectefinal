@@ -1,7 +1,7 @@
 {% block modalOperationDetail %}
 
-    <div class="modal fade" id="{{ operation.code }}" role="dialog">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="{{ relation.operation.code }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Detall de la Operativa</h5>
@@ -10,8 +10,81 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p> DETALLS </p>
-                    <br/>
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <h5 class="mt-0 mb-1">{{ relation.operation.title }}</h5>
+                                <p>{{ relation.operation.description }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-info-circle fa-align-justify mr-1"></i>
+                                    Tipus:
+                                </h5>
+                                <p>{{ relation.operation.type }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-coins fa-align-justify mr-1"></i>
+                                    Paga per hora:
+                                </h5>
+                                <p>{{ relation.operation.hourlyPay }} € / hora</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-user-clock fa-align-justify mr-1"></i>
+                                    Duració:
+                                </h5>
+                                <p>
+                                    {# OPERACIO DATES #}
+                                    {% set difference = date(relation.operation.dateEnd).diff(date(relation.operation.dateStart)) %}
+                                    {% set leftHours = difference.h %}
+                                    {% if leftHours > 24 %}
+                                        Més de 24 hores
+                                    {% else %}
+                                        {{ leftHours }} hores
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-clock fa-align-justify mr-1"></i>
+                                    Data d'inici:
+                                </h5>
+                                <p>{{ relation.operation.dateStart|date("F j, Y - g:i a") }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-stopwatch fa-align-justify mr-1"></i>
+                                    Data final:
+                                </h5>
+                                <p>{{ relation.operation.dateEnd|date("F j, Y - g:i a") }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-map-marked fa-align-justify mr-1"></i>
+                                    Localització:
+                                </h5>
+                                <p>Nom del port: {{ relation.operation.port.name }}</p>
+                                <p>Codi: {{ relation.operation.port.code }}</p>
+                                <p>País: {{ relation.operation.port.country }}</p>
+                                <p>Ciutat: {{ relation.operation.port.city }}</p>
+                                <p>(TODO: Inserir mapa)</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Employee;
+use App\Entity\Operation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,8 +32,14 @@ class DashboardController extends AbstractController
         $employee_id = $session->get('id');
 
         $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
+        $assignedOperations = sizeof( $employee->getEmployeeHasOperations() );
+        $availableOperations = sizeof( $this->getDoctrine()->getRepository(Operation::class)->findAll() );
 
-        return $this->render('main/templateLayout.html.twig', ['employee' => $employee]);
+        return $this->render('main/templateLayout.html.twig', [
+            'employee' => $employee,
+            'assignedOperations' => $assignedOperations,
+            'availableOperations' => $availableOperations
+        ]);
     }
 
     /**
