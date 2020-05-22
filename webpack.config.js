@@ -15,8 +15,8 @@ Encore
     //.setManifestKeyPrefix('build/')
 
     //PER PRODUCCIÓ
-    //.setPublicPath('./build')
-    //.setManifestKeyPrefix('build')
+    //.setPublicPath('build')
+    //.setManifestKeyPrefix('build/')
 
     /*
      * ENTRY CONFIG
@@ -80,3 +80,10 @@ Encore
 ;
 
 module.exports = Encore.getWebpackConfig();
+
+/*
+var config = Encore.getWebpackConfig();
+config.module.rules[3].options.publicPath = './';
+
+module.exports = config;
+*/
