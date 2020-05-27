@@ -27,6 +27,10 @@ class MainController extends AbstractController
     public function login(Request $request)
     {
         //Per evitar problemes de sessió de moment tanquem la session cada vegada que s'intenta fer login
+        //TODO
+        //Controlar si ja té login fet, redirigir a dashboard!!!!!
+        $session = new Session();
+        $session->clear();
 
         //Rebre dades formulari Login
         $email = $request->get('inputEmail');
@@ -106,6 +110,7 @@ class MainController extends AbstractController
      */
     public function logout(Request $request)
     {
+        //Netejar valors de la sessió activa
         $session = new Session();
         $session->clear();
 

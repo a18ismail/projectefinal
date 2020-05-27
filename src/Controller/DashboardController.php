@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Employee;
 use App\Entity\Operation;
+use App\Repository\EmployeeRepository;
+use App\Service\LoginValidator;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +17,13 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class DashboardController extends AbstractController
 {
 
+    private $loginValidator;
+
+    public function __construct(LoginValidator $validator)
+    {
+        $this->loginValidator = $validator;
+    }
+
     //TODO
     //FALTA CONTROL DE PERMISOS/SESSIÓ
 
@@ -21,7 +32,7 @@ class DashboardController extends AbstractController
      */
     public function index(Request $request)
     {
-        $employee = self::checkLogin($request);
+        $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [
@@ -44,7 +55,7 @@ class DashboardController extends AbstractController
      */
     public function profile(Request $request)
     {
-        $employee = self::checkLogin($request);
+        $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [
@@ -60,7 +71,7 @@ class DashboardController extends AbstractController
      */
     public function operations(Request $request)
     {
-        $employee = self::checkLogin($request);
+        $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [
@@ -76,7 +87,7 @@ class DashboardController extends AbstractController
      */
     public function calendarOperations(Request $request)
     {
-        $employee = self::checkLogin($request);
+        $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [
@@ -92,7 +103,7 @@ class DashboardController extends AbstractController
      */
     public function calendarAvailability(Request $request)
     {
-        $employee = self::checkLogin($request);
+        $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [
@@ -108,7 +119,7 @@ class DashboardController extends AbstractController
      */
     public function notifications(Request $request)
     {
-        $employee = self::checkLogin($request);
+        $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [
@@ -124,7 +135,7 @@ class DashboardController extends AbstractController
      */
     public function mail(Request $request)
     {
-        $employee = self::checkLogin($request);
+        $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [
@@ -140,7 +151,7 @@ class DashboardController extends AbstractController
      */
     public function personalReport(Request $request)
     {
-        $employee = self::checkLogin($request);
+        $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [
@@ -156,7 +167,7 @@ class DashboardController extends AbstractController
      */
     public function settings(Request $request)
     {
-        $employee = self::checkLogin($request);
+        $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [
@@ -167,21 +178,4 @@ class DashboardController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/checkLogin", name="checkLogin")
-     */
-    public function checkLogin(Request $request)
-    {
-        $session = $request->getSession();
-        $employee_id = $session->get('id');
-
-        if( is_null($employee_id) ){
-            $employee = null;
-        }else{
-            $repository = $this->getDoctrine()->getRepository(Employee::class);
-            $employee = $repository->find($employee_id);
-        }
-
-        return $employee;
-    }
 }

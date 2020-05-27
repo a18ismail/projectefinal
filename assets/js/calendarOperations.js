@@ -34,11 +34,21 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import caLocale from '@fullcalendar/core/locales/ca';
+import axios from 'axios/dist/axios';
 
 document.addEventListener('DOMContentLoaded', function() {
 
     //Load Events
-    //axioooooos
+    axios.get('getEvents')
+        .then(function (response) {
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+        });
 
     //Load FullCalendar
     var calendarEl = document.getElementById('calendar');
