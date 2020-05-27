@@ -38,21 +38,35 @@ import axios from 'axios/dist/axios';
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    //Load Events
-    axios.get('getEvents')
-        .then(function (response) {
-            console.log(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {
-            // always executed
-        });
+    //Funció per obtenir operatives utilitzant promises
+    function getOperations(){
+        return axios.get('getEvents')
+            .then( response => {
+                var receivedOperations = response.data;
+                var events = createEvents(receivedOperations);
+                return events;
+            })
+            .catch( error => {
+                console.log(error);
+            });
+    }
 
-    //Load FullCalendar
+    //Funció per formatejar i netejar les operacions en objectes Event
+    function createEvents(receivedOperations){
+        var arrayOfEvents = [];
+        receivedOperations.forEach( function(operation) {
+            var newEvent = {
+                title: operation.title,
+                start: operation.dateStart.date,
+                end: operation.dateEnd.date
+            }
+            arrayOfEvents.push(newEvent);
+        }, arrayOfEvents);
+        return arrayOfEvents;
+    }
+
+    //Crear calendari de tipus FullCalendar
     var calendarEl = document.getElementById('calendar');
-
     var calendar = new Calendar(calendarEl, {
         plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin, bootstrapPlugin ],
         header: {
@@ -79,5 +93,15 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     });
 
+    //Conseguir Events ja preparats, utilitzant promises
+    getOperations().then( events => {
+        var calendarEvents = events;
+        calendarEvents.forEach(function(event) {
+            //Afegir events creats al calendari creat
+            calendar.addEvent(event);
+        }, calendar);
+    })
+
+    //Mostrar calendari
     calendar.render();
 });

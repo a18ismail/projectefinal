@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Calendari Operatives - App{% endblock %}
+{% block title %}Calendari Disponibilitat - App{% endblock %}
 
 {% block stylesheets %}
-    {{ encore_entry_link_tags('calendarOperations') }}
+    {{ encore_entry_link_tags('calendarAvailability') }}
 {% endblock %}
 
 {% block body %}
@@ -45,9 +45,12 @@
                                     </div>
                                     <div class="card-body">
                                         <!-- the events -->
-                                        <div id="external-events">
-                                            <div class="external-event bg-success">Temps disponible</div>
-                                            <div class="external-event bg-warning">Vacances</div>
+                                        <div id='external-events'>
+                                            <p>
+                                                <strong>Selecciona i arrastra la teva disponibilitat</strong>
+                                            </p>
+                                            <div class='fc-event mb-2'>Disponibilitat</div>
+                                            <div class='fc-event mb-2'>Disponibilitat</div>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -58,14 +61,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-md-9">
-                            <div class="card card-primary">
-                                <div class="card-body p-0">
-                                    <!-- THE CALENDAR -->
-
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
+                            <div id='calendar'></div>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -82,5 +78,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('calendarOperations') }}
+    {{ encore_entry_script_tags('calendarAvailability') }}
 {% endblock %}
