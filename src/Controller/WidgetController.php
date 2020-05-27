@@ -18,8 +18,7 @@ class WidgetController extends AbstractController
         return $this->render('base.html.twig');
     }
 
-    //TODO
-    //CONSEGUIR NOMBRE DE OPERATIVES RESERVADES
+    //CONSEGUIR NOMBRE DE OPERATIVES ASSIGNADES
     /**
      * @Route("/widget", name="widget")
      */
@@ -31,12 +30,6 @@ class WidgetController extends AbstractController
         $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
         var_dump( sizeof( $employee->getEmployeeHasOperations() ) );
     }
-
-    //TODO
-    //CONSEGUIR NOMBRE DE OPERATIVES DISPONIBLES AL SISTEMA
-
-    //TODO
-    //CONSEGUIR INFORMACIÓ DE PROXIMA OPERATIVA
 
     //TODO
     //CONSEGUIR TEMPS RESTANT PER LA PROXIMA OPERATIVA

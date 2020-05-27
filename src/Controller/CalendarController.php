@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CalendarController extends AbstractController
@@ -19,6 +20,13 @@ class CalendarController extends AbstractController
 
     //TODO
     //RESPONSE JSON WITH ALL EVENTS OF CURRENT EMPLOYEE
+    /**
+     * @Route("/getCalendarOperationsEvents", name="getCalendarOperationsEvents")
+     */
+    public function getCalendarOperationsEvents(Request $request)
+    {
+
+    }
 
     //TODO
 

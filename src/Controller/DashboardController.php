@@ -13,13 +13,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class DashboardController extends AbstractController
 {
 
-    //Controlador principal pel "Panell de Control"
-    //Els noms dels metodes son provisionals
-    //Probablament cada "apartat de la pagina" tingui el seu propi controlador més endavant
-
     //TODO
-    //UTILITZAR METODE INDEPENDENT PER COMPROBAR LOGIN
-    //CHECK IF LOGGED IN -> GET EMPLOYEE DATA OR ID
     //FALTA CONTROL DE PERMISOS/SESSIÓ
 
     /**
@@ -27,19 +21,22 @@ class DashboardController extends AbstractController
      */
     public function index(Request $request)
     {
+        $employee = self::checkLogin($request);
 
-        $session = $request->getSession();
-        $employee_id = $session->get('id');
+        if( is_null($employee) ){
+            return $this->render('main/errorLogin.html.twig', [
+                'login_status' => false,
+            ]);
+        }else{
+            $assignedOperations = sizeof( $employee->getEmployeeHasOperations() );
+            $availableOperations = sizeof( $this->getDoctrine()->getRepository(Operation::class)->findAll() );
 
-        $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
-        $assignedOperations = sizeof( $employee->getEmployeeHasOperations() );
-        $availableOperations = sizeof( $this->getDoctrine()->getRepository(Operation::class)->findAll() );
-
-        return $this->render('main/templateLayout.html.twig', [
-            'employee' => $employee,
-            'assignedOperations' => $assignedOperations,
-            'availableOperations' => $availableOperations
-        ]);
+            return $this->render('main/templateLayout.html.twig', [
+                'employee' => $employee,
+                'assignedOperations' => $assignedOperations,
+                'availableOperations' => $availableOperations
+            ]);
+        }
     }
 
     /**
@@ -47,14 +44,15 @@ class DashboardController extends AbstractController
      */
     public function profile(Request $request)
     {
+        $employee = self::checkLogin($request);
 
-        $session = $request->getSession();
-        $employee_id = $session->get('id');
-
-        $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
-
-        return $this->render('dashboard/profile.html.twig', ['employee' => $employee]);
-        //return $this->render('dashboard/profile.html.twig');
+        if( is_null($employee) ){
+            return $this->render('main/errorLogin.html.twig', [
+                'login_status' => false,
+            ]);
+        }else {
+            return $this->render('dashboard/profile.html.twig', ['employee' => $employee]);
+        }
     }
 
     /**
@@ -62,12 +60,15 @@ class DashboardController extends AbstractController
      */
     public function operations(Request $request)
     {
-        $session = $request->getSession();
-        $employee_id = $session->get('id');
+        $employee = self::checkLogin($request);
 
-        $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
-
-        return $this->render('dashboard/operationsList.html.twig', ['employee' => $employee]);
+        if( is_null($employee) ){
+            return $this->render('main/errorLogin.html.twig', [
+                'login_status' => false,
+            ]);
+        }else {
+            return $this->render('dashboard/operationsList.html.twig', ['employee' => $employee]);
+        }
     }
 
     /**
@@ -75,12 +76,15 @@ class DashboardController extends AbstractController
      */
     public function calendarOperations(Request $request)
     {
-        $session = $request->getSession();
-        $employee_id = $session->get('id');
+        $employee = self::checkLogin($request);
 
-        $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
-
-        return $this->render('dashboard/calendarOperations.html.twig', ['employee' => $employee]);
+        if( is_null($employee) ){
+            return $this->render('main/errorLogin.html.twig', [
+                'login_status' => false,
+            ]);
+        }else {
+            return $this->render('dashboard/calendarOperations.html.twig', ['employee' => $employee]);
+        }
     }
 
     /**
@@ -88,12 +92,15 @@ class DashboardController extends AbstractController
      */
     public function calendarAvailability(Request $request)
     {
-        $session = $request->getSession();
-        $employee_id = $session->get('id');
+        $employee = self::checkLogin($request);
 
-        $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
-
-        return $this->render('dashboard/calendarAvailability.html.twig', ['employee' => $employee]);
+        if( is_null($employee) ){
+            return $this->render('main/errorLogin.html.twig', [
+                'login_status' => false,
+            ]);
+        }else {
+            return $this->render('dashboard/calendarAvailability.html.twig', ['employee' => $employee]);
+        }
     }
 
     /**
@@ -101,12 +108,15 @@ class DashboardController extends AbstractController
      */
     public function notifications(Request $request)
     {
-        $session = $request->getSession();
-        $employee_id = $session->get('id');
+        $employee = self::checkLogin($request);
 
-        $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
-
-        return $this->render('dashboard/notifications.html.twig', ['employee' => $employee]);
+        if( is_null($employee) ){
+            return $this->render('main/errorLogin.html.twig', [
+                'login_status' => false,
+            ]);
+        }else {
+            return $this->render('dashboard/notifications.html.twig', ['employee' => $employee]);
+        }
     }
 
     /**
@@ -114,12 +124,15 @@ class DashboardController extends AbstractController
      */
     public function mail(Request $request)
     {
-        $session = $request->getSession();
-        $employee_id = $session->get('id');
+        $employee = self::checkLogin($request);
 
-        $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
-
-        return $this->render('dashboard/mail.html.twig', ['employee' => $employee]);
+        if( is_null($employee) ){
+            return $this->render('main/errorLogin.html.twig', [
+                'login_status' => false,
+            ]);
+        }else {
+            return $this->render('dashboard/mail.html.twig', ['employee' => $employee]);
+        }
     }
 
     /**
@@ -127,12 +140,15 @@ class DashboardController extends AbstractController
      */
     public function personalReport(Request $request)
     {
-        $session = $request->getSession();
-        $employee_id = $session->get('id');
+        $employee = self::checkLogin($request);
 
-        $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
-
-        return $this->render('dashboard/personalReport.html.twig', ['employee' => $employee]);
+        if( is_null($employee) ){
+            return $this->render('main/errorLogin.html.twig', [
+                'login_status' => false,
+            ]);
+        }else {
+            return $this->render('dashboard/personalReport.html.twig', ['employee' => $employee]);
+        }
     }
 
     /**
@@ -140,11 +156,32 @@ class DashboardController extends AbstractController
      */
     public function settings(Request $request)
     {
+        $employee = self::checkLogin($request);
+
+        if( is_null($employee) ){
+            return $this->render('main/errorLogin.html.twig', [
+                'login_status' => false,
+            ]);
+        }else {
+            return $this->render('dashboard/settings.html.twig', ['employee' => $employee]);
+        }
+    }
+
+    /**
+     * @Route("/checkLogin", name="checkLogin")
+     */
+    public function checkLogin(Request $request)
+    {
         $session = $request->getSession();
         $employee_id = $session->get('id');
 
-        $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
+        if( is_null($employee_id) ){
+            $employee = null;
+        }else{
+            $repository = $this->getDoctrine()->getRepository(Employee::class);
+            $employee = $repository->find($employee_id);
+        }
 
-        return $this->render('dashboard/settings.html.twig', ['employee' => $employee]);
+        return $employee;
     }
 }

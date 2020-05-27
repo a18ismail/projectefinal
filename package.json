@@ -16,6 +16,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@fullcalendar/list": "^4.4.0",
         "admin-lte": "^3.0",
         "jquery": "^3.5.1"
     }

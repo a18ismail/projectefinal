@@ -37,38 +37,9 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="sticky-top mb-3">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Draggable Events</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <!-- the events -->
-                                        <div id="external-events">
-                                            <div class="external-event bg-success">Operativa Asignada</div>
-                                            <div class="external-event bg-warning">Operativa Reservada</div>
-                                            <div class="external-event bg-primary">Operativa disponible</div>
-                                        </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
-
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-9">
-                            <div class="card card-primary">
-                                <div class="card-body p-0">
-                                    <!-- THE CALENDAR -->
-
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
-                        <!-- /.col -->
+                       <div class="col-lg-12">
+                           <div id='calendar'></div>
+                       </div>
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -85,4 +56,3 @@
 {% block javascripts %}
     {{ encore_entry_script_tags('calendarOperations') }}
 {% endblock %}
-

@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Employee;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Employee;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -76,9 +76,10 @@ class MainController extends AbstractController
         $name = $request->get('registerName');
         $surnames = $request->get('registerSurnames');
 
-        // PROVISIONAL
         $entityManager = $this->getDoctrine()->getManager();
 
+        //TODO
+        //AFEGIR MES CAMPS AL FORMULARI
         $newEmployee = new Employee();
         $newEmployee->setName($name);
         $newEmployee->setSurnames($surnames);
@@ -105,8 +106,8 @@ class MainController extends AbstractController
      */
     public function logout(Request $request)
     {
-        $session = $request->getSession();
-        $session->invalidate();
+        $session = new Session();
+        $session->clear();
 
         return $this->render('main/logout.html.twig', [
             'login_status' => false,
