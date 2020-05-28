@@ -1,3 +1,19 @@
 .fc-today {
     background-color: #a4c9e5 !important;
 }
+.fc-content{
+    text-align: center;
+}
+.fc-event{
+    height: 28px;
+    font-size: 1em;
+    text-align-last: auto;
+    border-radius: 20px;
+}
+#external-events .fc-event {
+    margin: 1em 0;
+    cursor: move;
+}
+#eventsTrash{
+    display: flex;
+}
