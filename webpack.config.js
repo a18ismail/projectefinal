@@ -32,6 +32,8 @@ Encore
     .addEntry('operations', './assets/js/operations.js')
     .addEntry('calendarOperations', './assets/js/calendarOperations.js')
     .addEntry('calendarAvailability', './assets/js/calendarAvailability.js')
+    .addEntry('settings', './assets/js/settings.js')
+    .addEntry('landing', './assets/js/landing.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
