@@ -89,6 +89,11 @@ class Employee
      */
     private $employeeHasOperations;
 
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $availability = [];
+
     public function __construct()
     {
         $this->employeeHasOperations = new ArrayCollection();
@@ -284,6 +289,18 @@ class Employee
                 $employeeHasOperation->setEmployee(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAvailability(): ?array
+    {
+        return $this->availability;
+    }
+
+    public function setAvailability(?array $availability): self
+    {
+        $this->availability = $availability;
 
         return $this;
     }

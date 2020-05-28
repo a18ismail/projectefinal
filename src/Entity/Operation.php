@@ -64,6 +64,11 @@ class Operation
      */
     private $operationHasEmployee;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $urlLocation;
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
@@ -198,6 +203,18 @@ class Operation
                 $operationHasEmployee->setOperation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUrlLocation(): ?string
+    {
+        return $this->urlLocation;
+    }
+
+    public function setUrlLocation(?string $urlLocation): self
+    {
+        $this->urlLocation = $urlLocation;
 
         return $this;
     }
