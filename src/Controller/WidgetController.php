@@ -10,13 +10,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class WidgetController extends AbstractController
 {
-    /**
-     * @Route("/widget", name="widget")
-     */
-    public function index()
-    {
-        return $this->render('base.html.twig');
-    }
 
     //CONSEGUIR NOMBRE DE OPERATIVES ASSIGNADES
     /**
