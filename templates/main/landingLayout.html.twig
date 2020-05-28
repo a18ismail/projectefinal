@@ -2,6 +2,10 @@
 
 {% block title %}App{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('landing') }}
+{% endblock %}
+
 {% block body %}
 
     {% block header %}
@@ -12,4 +16,8 @@
         <h1 class="mt-5">Benvingut a la Web App de la nostra empresa</h1>
     </main>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('landing') }}
 {% endblock %}
