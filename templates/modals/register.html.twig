@@ -6,31 +6,49 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title h3 mb-1 font-weight-normal"> Registra't a la web </h1>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button id="closeRegisterModal" type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <form class="form-signin" action="{{ path('register') }}" method="POST">
-
+            <form class="form-signin">
                 <div class="modal-body">
                     <div class="mb-2">
                         <label for="registerName">Nom</label>
-                        <input name="registerName" type="text" id="registerName" class="form-control" placeholder="Nom" required autofocus>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                            </div>
+                            <input name="registerName" type="text" id="registerName" class="form-control" placeholder="Nom" required autofocus>
+                        </div>
                     </div>
                     <div class="mb-2">
                         <label for="registerSurnames">Cognoms</label>
-                        <input name="registerSurnames" type="text" id="registerSurnames" class="form-control" placeholder="Cognoms" required autofocus>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-check"></i></span>
+                            </div>
+                            <input name="registerSurnames" type="text" id="registerSurnames" class="form-control" placeholder="Cognoms" required autofocus>
+                        </div>
                     </div>
                     <div class="mb-2">
                         <label for="registerEmail">Email</label>
-                        <input name="registerEmail" type="text" id="registerEmail" class="form-control" placeholder="Email" required autofocus>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-paper-plane"></i></span>
+                            </div>
+                            <input name="registerEmail" type="text" id="registerEmail" class="form-control" placeholder="Email" required autofocus>
+                        </div>
                     </div>
                     <div class="mb-2">
                         <label for="registerPassword">Contrasenya</label>
-                        <input name="registerPassword" type="password" id="registerPassword" class="form-control" placeholder="Contrasenya" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input name="registerPassword" type="password" id="registerPassword" class="form-control" placeholder="Contrasenya" required>
+                        </div>
                     </div>
-                    <!-- <p id="message" class= "message-error"></p> -->
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="bttnRegister" class="btn btn-lg btn-primary btn-block">Registrar-se</button>
+                    <button type="button" id="btnRegister" class="btn btn-lg btn-primary btn-block">Registrar-se</button>
                 </div>
 
             </form>
