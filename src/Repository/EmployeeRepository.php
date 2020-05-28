@@ -19,13 +19,11 @@ class EmployeeRepository extends ServiceEntityRepository
         parent::__construct($registry, Employee::class);
     }
 
-    public function checkEmployeeLogin($email, $password) : array
+    public function checkEmployeeLogin($email) : array
     {
         $queryBuilder = $this->createQueryBuilder('e')
             ->andWhere('e.email = :email')
-            ->setParameter('email', $email)
-            ->andWhere('e.password = :password')
-            ->setParameter('password', $password);
+            ->setParameter('email', $email);
         $query = $queryBuilder->getQuery($queryBuilder);
         return $query->execute();
     }
