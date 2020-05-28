@@ -7,6 +7,7 @@ import '@fullcalendar/list/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/bootstrap/main.css';
 import '@fullcalendar/timegrid/main.css';
+import 'toastr/build/toastr.css';
 
 //IMPORTACIONS CSS PLANTILLA
 import '../css/adminlte.css';
@@ -26,6 +27,7 @@ import 'moment/moment.js';
 import './adminlte.js';
 
 //JS PERSONALITZAT D'AQUESTA PAGINA
+var $ = require('jquery');
 
 import { Calendar } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -35,6 +37,7 @@ import listPlugin from '@fullcalendar/list';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import caLocale from '@fullcalendar/core/locales/ca';
 import axios from 'axios/dist/axios';
+import toastr from 'toastr/toastr.js';
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -56,9 +59,11 @@ document.addEventListener('DOMContentLoaded', function() {
         var arrayOfEvents = [];
         receivedOperations.forEach( function(operation) {
             var newEvent = {
+                id: operation.code,
                 title: operation.title,
                 start: operation.dateStart.date,
-                end: operation.dateEnd.date
+                end: operation.dateEnd.date,
+                status: operation.status
             }
             arrayOfEvents.push(newEvent);
         }, arrayOfEvents);
@@ -69,8 +74,19 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new Calendar(calendarEl, {
         plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin, bootstrapPlugin ],
+        customButtons: {
+            updateButton: {
+                text: 'Actualitzar',
+                click: function() {
+                    console.log('vull actualitzar');
+                    calendar.removeAllEvents();
+                    load();
+                    toastr.success('Calendari actualitzat correctament!');
+                }
+            }
+        },
         header: {
-            left: 'prev,next today',
+            left: 'prev,next today, updateButton',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
@@ -84,23 +100,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 eventLimit: 2
             }
         },
-        events: [
-            {
-                id: 'test',
-                title: 'Operativa de prova',
-                start: '2020-05-26'
-            }
-        ]
+        events: [],
+        eventClick:  function(info) {
+            console.log(info.event.id);
+            $('#'+info.event.id).modal('show');
+        }
     });
 
     //Conseguir Events ja preparats, utilitzant promises
-    getOperations().then( events => {
-        var calendarEvents = events;
-        calendarEvents.forEach(function(event) {
-            //Afegir events creats al calendari creat
-            calendar.addEvent(event);
-        }, calendar);
-    })
+    function load(){
+        getOperations().then( events => {
+            var calendarEvents = events;
+            calendarEvents.forEach(function(event) {
+                //Afegir events creats al calendari creat
+                if(event.status == 'confirmed'){
+                    event.backgroundColor = '#28a745';
+                }else if(event.status == 'reserved'){
+                    event.backgroundColor = '#ffc107';
+                }else{
+                    event.backgroundColor = '#007bff';
+                }
+                calendar.addEvent(event);
+            }, calendar);
+        })
+    }
+    load();
 
     //Mostrar calendari
     calendar.render();
