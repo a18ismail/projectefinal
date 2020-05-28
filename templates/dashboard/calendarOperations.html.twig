@@ -47,6 +47,10 @@
         </div>
         <!-- /.content-wrapper -->
 
+        {% for relation in employee.employeeHasOperations %}
+            {{ include('/modals/operationDetail.html.twig', {'relation': relation}) }}
+        {% endfor %}
+
         <!-- Main Footer -->
         {{ include('footers/footerDashboard.html.twig') }}
     </div>
