@@ -106,7 +106,7 @@ class AppFixtures extends Fixture
             $name = 'Usuari '.$i;
             $surnames = 'Cognoms';
             $email = 'user_'.$i.'_mail@gmail.com';
-            $password = 'password';
+            $password = password_hash('password', PASSWORD_DEFAULT);
             $nif = "XXXXXXXXX".$i;
             $phoneNumber = $i.$i.$i.$i.$i.$i.$i.$i.$i;
             $birthday = new \DateTime('@'.strtotime('now'));

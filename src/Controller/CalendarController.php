@@ -22,48 +22,114 @@ class CalendarController extends AbstractController
     }
 
     /**
-     * @Route("/calendar", name="calendar")
-     */
-    public function index()
-    {
-        $employee = $this->loginValidator->checkLogin();
-        return $this->render('calendar/index.html.twig', [
-            'controller_name' => 'CalendarController',
-        ]);
-    }
-
-    /**
      * @Route("/getEvents", name="getEvents")
      */
     public function getCalendarOperationsEvents(Request $request)
     {
         //Conseguir dades de l'empleat registrat
         $employee = $this->loginValidator->checkLogin();
-        $assignedOperations = $employee->getEmployeeHasOperations();
 
-        $calendarEvents = array();
+        if( is_null($employee) ){
+            return new Response('Hi ha hagut un error amb la teva petició.');
+        }else {
+            //Conseguir operatives
+            $assignedOperations = $employee->getEmployeeHasOperations();
+            $calendarEvents = array();
 
-        foreach($assignedOperations as $assignedOperation) {
-            $operation = $assignedOperation->getOperation();
+            //Afegir operatives a l'array de resposta
+            foreach ($assignedOperations as $assignedOperation) {
+                $operation = $assignedOperation->getOperation();
 
-            $calendarEvents[] = array(
-                'code' => $operation->getCode(),
-                'title' => $operation->getTitle(),
-                'type' => $operation->getType(),
-                'dateStart' => $operation->getDateStart(),
-                'dateEnd' => $operation->getDateEnd(),
-                'description' => $operation->getDescription()
-            );
+                $calendarEvents[] = array(
+                    'code' => $operation->getCode(),
+                    'title' => $operation->getTitle(),
+                    'type' => $operation->getType(),
+                    'dateStart' => $operation->getDateStart(),
+                    'dateEnd' => $operation->getDateEnd(),
+                    'description' => $operation->getDescription(),
+                    'status' => $assignedOperation->getStatus()
+                );
+            }
+
+            //Crear la resposta
+            $response = new JsonResponse($calendarEvents);
+
+            //Enviar la resposta
+            return $response;
+        }
+    }
+
+    /**
+     * @Route("/saveAvailability", name="saveAvailability")
+     */
+    public function saveAvailability(Request $request)
+    {
+        //Conseguir empleat registrat
+        $employee = $this->loginValidator->checkLogin();
+
+        if( is_null($employee) ){
+            return new Response('Hi ha hagut un error amb la teva petició.');
+        }else {
+            //Conseguir dades i convertir en array d'objectes
+            $data = $request->getContent();
+            $JSONData = json_decode($data);
+            $eventsObjects = json_decode($JSONData->events );
+
+            $arrayAvailability = array();
+
+            //Formatejar la disponibilitat en un array per la BD/objecte
+            foreach ($eventsObjects as $eventObject) {
+                $event = array(
+                    'dateStart' => $eventObject->dateStart,
+                    'dateEnd' => $eventObject->dateEnd
+                );
+                array_push($arrayAvailability, $event);
+            }
+
+            //Emmagatzemar la disponibilitat de l'empleat
+            $entityManager = $this->getDoctrine()->getManager();
+            $employee->setAvailability($arrayAvailability);
+            $entityManager->flush();
+
+            return new Response('Guardada correctament.');
         }
 
-        //Crear la resposta
-        $response = new JsonResponse($calendarEvents);
-
-        //Enviar la resposta
-        //$response->send();
-
-        return $response;
     }
+
+    /**
+     * @Route("/getAvailability", name="getAvailability")
+     */
+    public function getAvailability()
+    {
+        //Conseguir empleat registrat
+        $employee = $this->loginValidator->checkLogin();
+
+        if( is_null($employee) ){
+            return new Response('Hi ha hagut un error amb la teva petició.');
+        }else {
+            $savedArray = $employee->getAvailability();
+
+            $arrayAvailability = array();
+
+            foreach ($savedArray as $item){
+                $event = array(
+                    'dateStart' => $item['dateStart'],
+                    'dateEnd' => $item['dateEnd']
+                );
+                array_push($arrayAvailability, $event);
+            }
+
+            //Crear la resposta
+            $response = new JsonResponse($arrayAvailability);
+
+            //Enviar la resposta
+            return $response;
+
+        }
+    }
+
+    //TODO
+    //CHECK AVAILABILITY OF EMPLOYEE BEFORE ADDING A NEW OPERATION
 
 
 }

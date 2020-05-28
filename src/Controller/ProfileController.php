@@ -38,8 +38,8 @@ class ProfileController extends AbstractController
         $postcode = $request->get('inputPostcode');
         $notes = $request->get('inputNotes');
 
-        $phone=(int)$phone;
-        $postcode=(int)$postcode;
+        $phone = (int)$phone;
+        $postcode = (int)$postcode;
         
         //Conseguim ID per poder editar l'objecte
         $session = $request->getSession();
