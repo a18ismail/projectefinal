@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="95e0fe0c-07ed-42bd-9984-eda18a4472dc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard/profile.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dashboard/settings.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard/settings.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/landingLayout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/landingLayout.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/menu/sideNavBar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/menu/sideNavBar.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/modals/operationDetail.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/modals/operationDetail.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/modals/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/modals/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +38,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/a18ismail/projectefinal.git" />
+      </set>
+    </option>
   </component>
   <component name="ProjectId" id="1bZbD5I2itfG1rKwNf8oQAEqF7J" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -38,8 +59,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="yarn" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -64,44 +87,89 @@
       <workItem from="1589262482106" duration="11957000" />
       <workItem from="1589275056022" duration="9840000" />
       <workItem from="1589372330741" duration="516000" />
+      <workItem from="1589387496101" duration="2563000" />
+      <workItem from="1589441127541" duration="32133000" />
+      <workItem from="1589513348493" duration="18158000" />
+      <workItem from="1589884736343" duration="1869000" />
+      <workItem from="1589969018204" duration="1356000" />
+      <workItem from="1590035854506" duration="5312000" />
+      <workItem from="1590039651911" duration="43483000" />
+      <workItem from="1590137525340" duration="1211000" />
+      <workItem from="1590485599094" duration="12302000" />
+      <workItem from="1590554351348" duration="5810000" />
+      <workItem from="1590572034708" duration="2695000" />
+      <workItem from="1590575289469" duration="1544000" />
+      <workItem from="1590577177812" duration="966000" />
+      <workItem from="1590578633642" duration="42166000" />
+      <workItem from="1590652994976" duration="15413000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="438" y="175" width="518" height="388" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589264228436">
-      <screen x="0" y="0" width="1366" height="743" />
+    <state x="469" y="202" width="595" height="389" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589526727775">
+      <screen x="45" y="27" width="1321" height="741" />
     </state>
     <state x="438" y="175" width="518" height="388" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.743@0.0.1366.743" timestamp="1589264228436" />
+    <state x="469" y="202" width="595" height="389" key="#com.intellij.fileTypes.FileTypeChooser/45.27.1321.741@45.27.1321.741" timestamp="1589526727775" />
     <state x="489" y="55" width="379" height="629" key="#com.intellij.ide.util.MemberChooser" timestamp="1588862080272">
       <screen x="0" y="0" width="1366" height="743" />
     </state>
     <state x="489" y="55" width="379" height="629" key="#com.intellij.ide.util.MemberChooser/0.0.1366.743@0.0.1366.743" timestamp="1588862080272" />
-    <state x="416" y="130" width="526" height="479" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588861316058">
-      <screen x="0" y="0" width="1366" height="743" />
+    <state x="447" y="157" width="524" height="486" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590653797584">
+      <screen x="45" y="27" width="1321" height="741" />
     </state>
     <state x="416" y="130" width="526" height="479" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.743@0.0.1366.743" timestamp="1588861316058" />
+    <state x="447" y="157" width="524" height="486" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/45.27.1321.741@45.27.1321.741" timestamp="1590653797584" />
+    <state x="145" y="127" width="1121" height="541" key="DiffContextDialog" timestamp="1590677302153">
+      <screen x="45" y="27" width="1321" height="741" />
+    </state>
+    <state x="145" y="127" width="1121" height="541" key="DiffContextDialog/45.27.1321.741@45.27.1321.741" timestamp="1590677302153" />
     <state x="466" y="130" width="426" height="479" key="FileChooserDialogImpl" timestamp="1588853992955">
       <screen x="0" y="0" width="1366" height="743" />
     </state>
     <state x="466" y="130" width="426" height="479" key="FileChooserDialogImpl/0.0.1366.743@0.0.1366.743" timestamp="1588853992955" />
-    <state x="492" y="67" width="374" height="605" key="RollbackChangesDialog" timestamp="1588853559490">
-      <screen x="0" y="0" width="1366" height="743" />
+    <state x="464" y="101" width="473" height="563" key="NewPhpClassDialog" timestamp="1590575694667">
+      <screen x="45" y="27" width="1321" height="741" />
+    </state>
+    <state x="464" y="101" width="473" height="563" key="NewPhpClassDialog/45.27.1321.741@45.27.1321.741" timestamp="1590575694667" />
+    <state x="521" y="94" width="341" height="635" key="RollbackChangesDialog" timestamp="1590573336711">
+      <screen x="45" y="27" width="1321" height="741" />
     </state>
     <state x="492" y="67" width="374" height="605" key="RollbackChangesDialog/0.0.1366.743@0.0.1366.743" timestamp="1588853559490" />
-    <state x="187" y="7" key="SettingsEditor" timestamp="1588907593195">
-      <screen x="0" y="0" width="1366" height="743" />
+    <state x="521" y="94" width="341" height="635" key="RollbackChangesDialog/45.27.1321.741@45.27.1321.741" timestamp="1590573336711" />
+    <state x="226" y="34" width="1022" height="732" key="SettingsEditor" timestamp="1589456464027">
+      <screen x="45" y="27" width="1321" height="741" />
     </state>
     <state x="187" y="7" key="SettingsEditor/0.0.1366.743@0.0.1366.743" timestamp="1588907593195" />
-    <state x="389" y="116" width="622" height="512" key="find.popup" timestamp="1589272131779">
-      <screen x="0" y="0" width="1366" height="743" />
+    <state x="226" y="34" width="1022" height="732" key="SettingsEditor/45.27.1321.741@45.27.1321.741" timestamp="1589456464027" />
+    <state x="421" y="143" width="739" height="594" key="find.popup" timestamp="1590667812390">
+      <screen x="45" y="27" width="1321" height="741" />
     </state>
     <state x="389" y="116" width="622" height="512" key="find.popup/0.0.1366.743@0.0.1366.743" timestamp="1589272131779" />
-    <state x="346" y="20" width="672" height="676" key="search.everywhere.popup" timestamp="1589264486210">
-      <screen x="0" y="0" width="1366" height="743" />
+    <state x="421" y="143" width="739" height="594" key="find.popup/45.27.1321.741@45.27.1321.741" timestamp="1590667812390" />
+    <state x="369" y="167" key="run.anything.popup" timestamp="1590619362287">
+      <screen x="45" y="27" width="1321" height="741" />
+    </state>
+    <state x="369" y="167" key="run.anything.popup/45.27.1321.741@45.27.1321.741" timestamp="1590619362287" />
+    <state x="380" y="47" width="672" height="675" key="search.everywhere.popup" timestamp="1590688650327">
+      <screen x="45" y="27" width="1321" height="741" />
     </state>
     <state x="346" y="20" width="672" height="676" key="search.everywhere.popup/0.0.1366.743@0.0.1366.743" timestamp="1589264486210" />
+    <state x="380" y="47" width="672" height="675" key="search.everywhere.popup/45.27.1321.741@45.27.1321.741" timestamp="1590688650327" />
   </component>
 </project>
