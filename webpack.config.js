@@ -15,6 +15,9 @@ Encore
     //.setManifestKeyPrefix('build/')
 
     //PER PRODUCCIÓ
+    //En la majoria del casos l'aplicació será desplagada en un subdirectori d'un servidor
+    //En aquest cas cal sobrescriure la ruta del directori /build, on es troben tots els recursos
+    //Només cal descomentar les següents dues linies, i comentar la configuració anterior de setPublicPath
     //.setPublicPath('build')
     //.setManifestKeyPrefix('build/')
 
