@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
             newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
             email: document.getElementById('email').value
         };
-        axios.post('/changePassword', {
+        axios.post('changePassword', {
             data: JSON.stringify(formData)
         })
             .then(function (response) {
@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(function (error) {
+                toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
                 console.log(error);
             });
     })
@@ -67,7 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var formData = {
             email: document.getElementById('email').value
         }
-        axios.post('/downloadEmployeeData', {
+        let urlProd = window.location.host + '/downloadEmployeeData';
+        axios.post(urlProd, {
             data: JSON.stringify(formData)
         })
             .then(function (response) {

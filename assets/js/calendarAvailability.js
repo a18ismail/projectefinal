@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return receivedAvailability;
             })
             .catch( error => {
+                toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
                 console.log(error);
             });
     }
@@ -131,13 +132,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Enviar disponibiilitat
     function sendAvailability(availability){
-        axios.post('/saveAvailability', {
+        axios.post('saveAvailability', {
             events: JSON.stringify(availability)
         })
             .then(function (response) {
                 console.log(response);
             })
             .catch(function (error) {
+                toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
                 console.log(error);
             });
     }

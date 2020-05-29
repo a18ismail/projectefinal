@@ -29,7 +29,7 @@ document.getElementById('btnRegister').addEventListener('click', function () {
         registerName: document.getElementById('registerName').value,
         registerSurnames: document.getElementById('registerSurnames').value
     };
-    axios.post('/register', {
+    axios.post('register', {
         data: JSON.stringify(formData)
     })
         .then(function (response) {

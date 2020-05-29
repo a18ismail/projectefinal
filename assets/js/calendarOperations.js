@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Funció per obtenir operatives utilitzant promises
     function getOperations(){
+        let urlProd = window.location.host + '/getEvents';
         return axios.get('getEvents')
             .then( response => {
                 var receivedOperations = response.data;
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return events;
             })
             .catch( error => {
+                toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
                 console.log(error);
             });
     }
