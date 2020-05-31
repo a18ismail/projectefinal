@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Missatges - App{% endblock %}
+{% block title %}Missatges - IntraSea{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('mail') }}
+{% endblock %}
 
 {% block body %}
     <div class="wrapper">
@@ -30,8 +34,68 @@
             </div>
             <!-- /.content-header -->
 
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-10">
+                    <!-- DIRECT CHAT PRIMARY -->
+                    <div class="card cardutline direct-chat direct-chat-primary direct-chat-contacts-open">
+                        <div class="card-header">
+                            <h1 class="card-title" style="font-size: 1.5rem" data-id="">Selecciona un contacte</h1>
+                            <div class="card-tools">
+                                <button id="updateChat" type="button" class="btn btn-outline-success mr-2"> Actualitzar</button>
+                                <button type="button" class="btn btn-tool mr-1" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fas fa-comments"></i></button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <!-- Conversations are loaded here -->
+                            <div class="direct-chat-messages">
 
+                            </div>
+                            <!--/.direct-chat-messages-->
 
+                            <!-- Contacts are loaded here -->
+                            <div class="direct-chat-contacts">
+                                <ul class="contacts-list">
+                                    {% for contact in contacts %}
+                                        <li class="messageContact" id="{{ contact.id }}">
+                                            <a>
+                                                <img class="contacts-list-img"
+                                                     src="{{ asset('./images/profiles/profile_image_stock01.png') }}">                                            <div class="contacts-list-info">
+                                                  <span class="contacts-list-name">
+                                                      {{ contact.name }}
+                                                  </span>
+                                                </div>
+                                                <!-- /.contacts-list-info -->
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                    <!-- End Contact Item -->
+                                </ul>
+                                <!-- /.contatcts-list -->
+                            </div>
+                            <!-- /.direct-chat-pane -->
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <form action="" method="post">
+                                <div class="input-group">
+                                    <input type="text" name="message" placeholder="Escriu un missatge..."
+                                           class="form-control">
+                                    <span class="input-group-append">
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!--/.direct-chat -->
+
+                    <!-- /.col -->
+                </div>
+            </div>
 
         </div>
         <!-- /.content-wrapper -->
@@ -40,4 +104,8 @@
         {{ include('footers/footerDashboard.html.twig') }}
     </div>
     <!-- ./wrapper -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('mail') }}
 {% endblock %}

@@ -36,7 +36,7 @@ class DashboardController extends AbstractController
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
-            return $this->render('main/errorLogin.html.twig', [
+            return $this->render('main/signError.html.twig', [
                 'login_status' => false,
             ]);
         }else{
@@ -59,7 +59,7 @@ class DashboardController extends AbstractController
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
-            return $this->render('main/errorLogin.html.twig', [
+            return $this->render('main/signError.html.twig', [
                 'login_status' => false,
             ]);
         }else {
@@ -76,14 +76,14 @@ class DashboardController extends AbstractController
 
         $relationRepository = $this->getDoctrine()->getRepository(EmployeeHasOperation::class);
 
-        $freeOperations = $this->getDoctrine()->getRepository(Operation::class)->findAllAvailableOperations($relationRepository);
+        $availableOperations = $this->getDoctrine()->getRepository(Operation::class)->findAllAvailableOperations($relationRepository);
 
         if( is_null($employee) ){
-            return $this->render('main/errorLogin.html.twig', [
+            return $this->render('main/signError.html.twig', [
                 'login_status' => false,
             ]);
         }else {
-            return $this->render('dashboard/operationsList.html.twig', ['employee' => $employee, 'freeOperations' => $freeOperations]);
+            return $this->render('dashboard/operationsList.html.twig', ['employee' => $employee, 'availableOperations' => $availableOperations]);
         }
     }
 
@@ -95,7 +95,7 @@ class DashboardController extends AbstractController
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
-            return $this->render('main/errorLogin.html.twig', [
+            return $this->render('main/signError.html.twig', [
                 'login_status' => false,
             ]);
         }else {
@@ -111,7 +111,7 @@ class DashboardController extends AbstractController
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
-            return $this->render('main/errorLogin.html.twig', [
+            return $this->render('main/signError.html.twig', [
                 'login_status' => false,
             ]);
         }else {
@@ -127,7 +127,7 @@ class DashboardController extends AbstractController
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
-            return $this->render('main/errorLogin.html.twig', [
+            return $this->render('main/signError.html.twig', [
                 'login_status' => false,
             ]);
         }else {
@@ -142,12 +142,17 @@ class DashboardController extends AbstractController
     {
         $employee = $this->loginValidator->checkLogin();
 
+        $allEmployees = $this->getDoctrine()->getRepository(Employee::class)->findAll();
+
         if( is_null($employee) ){
-            return $this->render('main/errorLogin.html.twig', [
+            return $this->render('main/signError.html.twig', [
                 'login_status' => false,
             ]);
         }else {
-            return $this->render('dashboard/mail.html.twig', ['employee' => $employee]);
+            return $this->render('dashboard/mail.html.twig', [
+                'employee' => $employee,
+                'contacts' => $allEmployees
+            ]);
         }
     }
 
@@ -161,7 +166,7 @@ class DashboardController extends AbstractController
         //TODO GET COMPLETED OPERATIONS ONLY
 
         if( is_null($employee) ){
-            return $this->render('main/errorLogin.html.twig', [
+            return $this->render('main/signError.html.twig', [
                 'login_status' => false,
             ]);
         }else {
@@ -177,7 +182,7 @@ class DashboardController extends AbstractController
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
-            return $this->render('main/errorLogin.html.twig', [
+            return $this->render('main/signError.html.twig', [
                 'login_status' => false,
             ]);
         }else {

@@ -38,6 +38,10 @@ Encore
     .addEntry('settings', './assets/js/settings.js')
     .addEntry('landing', './assets/js/landing.js')
     .addEntry('reports', './assets/js/reports.js')
+    .addEntry('mail', './assets/js/mail.js')
+    .addEntry('landing2', './assets/js/landing2.js')
+    .addEntry('signin', './assets/js/signin.js')
+    .addEntry('signup', './assets/js/signup.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 

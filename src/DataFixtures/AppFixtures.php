@@ -142,7 +142,7 @@ class AppFixtures extends Fixture
             $addOperationToEmployee02 = new EmployeeHasOperation();
             $addOperationToEmployee02->setEmployee($employee);
             $addOperationToEmployee02->setOperation($operativa02);
-            $addOperationToEmployee02->setStatus('confirmed');
+            $addOperationToEmployee02->setStatus('reserved');
             $addOperationToEmployee02->setRealDuration('5');
 
             $addOperationToEmployee03 = new EmployeeHasOperation();

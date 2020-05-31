@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Login - InterSea{% endblock %}</title>
+    <!-- CSS -->
+    {% include('headers/templateCSS.html.twig') %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('signin') }}
+    {% endblock %}
+</head>
+<body class="hold-transition login-page">
+{% block body %}
+    <div class="login-box">
+        <div class="login-logo">
+            <a><b> Benvingut a la plataforma de InterSea</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Introdueix les teves dades per entrar:</p>
+
+                <form action="{{ path('login') }}" method="post">
+                    <div class="input-group mb-3">
+                        <input id="inputEmail" name="inputEmail" type="email" class="form-control" placeholder="Correu electrònic">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input id="inputPassword" name="inputPassword" type="password" class="form-control" placeholder="Contrasenya">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Recorda'm
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <!-- /.social-auth-links -->
+                <p class="mb-0">
+                    <a href="{{ path('signup') }}" class="text-center">Crear un nou compte</a>
+                </p>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+{% endblock %}
+<!-- JS -->
+{% block javascripts %}
+    {{ encore_entry_script_tags('signin') }}
+{% endblock %}
+
+</body>
+
+</html>

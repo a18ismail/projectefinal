@@ -89,11 +89,6 @@ function loadSalaryData(){
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    /*getRemainingTimeOperation().then( data => {
-        //console.log(data);
-        displayCountdownClock(data);
-    })*/
-
     //Carregar gràfica d'hores treballades
     loadWorkedHours();
 

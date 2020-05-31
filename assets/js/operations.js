@@ -27,8 +27,11 @@ import 'admin-lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js'
 import './adminlte.js';
 
 //JS PERSONALITZAT D'AQUESTA PAGINA
+import axios from 'axios/dist/axios';
+import toastr from 'toastr/toastr.js';
 var $ = require('jquery');
 
+//Mostrar taula utilitzant el plugin DataTables amb Jquery
 $(document).ready(function() {
     $("#operationsList").DataTable({
         "responsive": true,
@@ -44,7 +47,56 @@ $(document).ready(function() {
         $(this).click(function() {
             $('#'+id).modal('show');
         });
-        console.log(id);
+
     });
+
 } );
+
+//Funció generalitzada per enviar una petició per assignar, eliminar i confirmar operatives operatives
+function setOperation(url, code){
+    axios.post(url, {
+        operationCode: code
+    })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
+            console.log(error);
+        });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    //Per assignar una operativa disponible
+    var assignOperationButtons = document.getElementsByClassName('assignOperation');
+
+    Array.from(assignOperationButtons).forEach(function(button) {
+        let operationCode = button.getAttribute('data-id');
+        button.addEventListener('click', function () {
+            setOperation('assignOperation', operationCode);
+        }, operationCode);
+    });
+
+    //Per eliminar una operativa assignada
+    var deleteOperationButtons = document.getElementsByClassName('deleteOperation');
+
+    Array.from(deleteOperationButtons).forEach(function(button) {
+        let operationCode = button.getAttribute('data-id');
+        button.addEventListener('click', function () {
+            setOperation('deleteOperation', operationCode);
+        }, operationCode);
+    });
+
+    //Per confirmar una operativa assignada
+    var confirmOperationButtons = document.getElementsByClassName('confirmOperation');
+
+    Array.from(confirmOperationButtons).forEach(function(button) {
+        let operationCode = button.getAttribute('data-id');
+        button.addEventListener('click', function () {
+            setOperation('confirmOperation', operationCode);
+        }, operationCode);
+    });
+
+})
 

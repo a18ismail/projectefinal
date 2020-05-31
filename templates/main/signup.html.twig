@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Registre - InterSea{% endblock %}</title>
+    <!-- CSS -->
+    {% include('headers/templateCSS.html.twig') %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('signup') }}
+    {% endblock %}
+</head>
+<body class="hold-transition login-page">
+{% block body %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('signup') }}
+    {% endblock %}
+    <div class="register-box">
+        <div class="register-logo">
+            <a><b>Inter</b>Sea</a>
+        </div>
+
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Crea un nou compte</p>
+
+                <form>
+                    <div class="input-group mb-3">
+                        <input name="registerName" id="registerName" type="text" class="form-control" placeholder="Nom">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input name="registerSurnames" id="registerSurnames" type="text" class="form-control" placeholder="Cognoms">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input name="registerEmail" id="registerEmail" type="email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input name="registerPassword" id="registerPassword" type="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                <label for="agreeTerms">
+                                    Accepto la politica de privacitat
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button id="btnRegister" type="button" class="btn btn-primary btn-block">Enviar</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <a href="{{ path('signin') }}" class="text-center">Ja tinc un compte</a>
+            </div>
+            <!-- /.form-box -->
+
+        </div><!-- /.card -->
+
+    </div>
+    <!-- /.register-box -->
+{% endblock %}
+<!-- JS -->
+
+
+</body>
+
+</html>

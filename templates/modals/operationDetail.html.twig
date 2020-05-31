@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detall de la Operativa</h5>
+                    <h5 class="modal-title">Detall de la Operativa</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -13,20 +13,21 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-md-12">
-                                <h5 class="mt-0 mb-1">{{ relation.operation.title }}</h5>
+                                <h5 class="mt-0 mb-2">{{ relation.operation.title }}</h5>
                                 <p>{{ relation.operation.description }}</p>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-6">
-                                {% if relation.status == 'confirmed' or relation.status == 'reserved' %}
-                                    <button id="deleteOperation" type="button" class="btn btn-block btn-outline-danger btn-lg">Eliminar aquesta operativa</button>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6">
-                                {% if relation.status != 'confirmed' and relation.status != 'reserved' %}
-                                    <button id="assignOperation" type="button" class="btn btn-block btn-outline-success btn-lg">Assignar-me aquesta operativa</button>
-                                {% endif %}
+                            {% if relation.status == 'confirmed' or relation.status == 'reserved' %}
+                                <div class="col-md-6">
+                                    <button data-id="{{ relation.operation.code }}" type="button" class="btn btn-block btn-outline-danger btn-lg deleteOperation">Eliminar aquesta operativa</button>
+                                </div>
+                            {% endif %}
+                            {% if relation.status == 'reserved' %}
+                                <div class="col-md-6">
+                                    <button data-id="{{ relation.operation.code }}" type="button" class="btn btn-block btn-outline-success btn-lg confirmOperation">Confirmar aquesta operativa</button>
+                                </div>
+                            {% endif %}
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -110,7 +111,6 @@
                                 <p>Codi: {{ relation.operation.port.code }}</p>
                                 <p>País: {{ relation.operation.port.country }}</p>
                                 <p>Ciutat: {{ relation.operation.port.city }}</p>
-                                <p>Localització: {{ relation.operation.urlLocation }}</p>
                             </div>
                         </div>
                     </div>

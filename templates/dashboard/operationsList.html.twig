@@ -53,13 +53,13 @@
                                 <div class="card-body">
                                     <table id="operationsList" class="table table-bordered table-hover">
                                         <thead>
-                                        <tr>
-                                            <th>Codi</th>
-                                            <th>Titol</th>
-                                            <th>Data d'inici</th>
-                                            <th>Estat</th>
-                                            <th>Detalls</th>
-                                        </tr>
+                                            <tr>
+                                                <th>Codi</th>
+                                                <th>Titol</th>
+                                                <th>Data d'inici</th>
+                                                <th>Estat</th>
+                                                <th>Detalls</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
 
@@ -73,8 +73,8 @@
                                                         Assignada
                                                     {% elseif relation.status == 'reserved' %}
                                                         Reservada
-                                                    {% else %}
-                                                        Disponible
+                                                    {% elseif relation.status == 'completed' %}
+                                                        Completada
                                                     {% endif %}
                                                 </td>
                                                 <td>
@@ -83,7 +83,7 @@
                                             </tr>
                                         {% endfor %}
 
-                                        {% for operation in freeOperations %}
+                                        {% for operation in availableOperations %}
                                             <tr>
                                                 <td>{{ operation.code }}</td>
                                                 <td>{{ operation.title }}</td>
@@ -111,6 +111,11 @@
                 {% for  relation in employee.employeeHasOperations %}
                     {{ include('/modals/operationDetail.html.twig', {'relation': relation}) }}
                 {% endfor %}
+
+                {% for  operation in availableOperations %}
+                    {{ include('/modals/operationAvailableDetail.html.twig', {'operation': operation}) }}
+                {% endfor %}
+
             </section>
             <!-- /.content -->
         </div>

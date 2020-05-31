@@ -128,7 +128,7 @@ class WidgetController extends AbstractController
                 $operation = $relation->getOperation();
 
                 //Filtrem l'any actual
-                if( $operation->getDateStart()->format('Y') == date('Y') ){
+                if( $operation->getDateStart()->format('Y') == date('Y') && $relation->getStatus() == 'completed' ){
 
                     $relationDuration = $relation->getRealDuration();
                     $operationHourlyPay = $operation->getHourlyPay();

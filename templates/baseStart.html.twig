@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}IntraSea{% endblock %}</title>
+    <!-- CSS -->
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('landing2') }}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="site-wrapper">
+        <header class="site-header">
+            <div class="container">
+                <div class="row justify-content-center align-items-center position-relative">
+                    <div class="col-sm-3 col-6 col-lg-2 col-xl-2 order-lg-1">
+                        <div>
+                            <a href=""><img src="{{ asset('./images/landing/sea.png') }}" width="100" alt="" /></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-lg-3 col-xl-3 d-none d-sm-block order-lg-3">
+                        <div class="header-btns">
+                            <div class="btn-1">
+                                <a href="{{ path('signup') }}">Registre</a>
+                            </div>
+                            <div class="btn-2">
+                                <a href="{{ path('signin') }}">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Menu Block -->
+                    <div class="col-sm-1 col-6 col-lg-7 col-xl-6 offset-xl-1 position-static order-lg-2">
+                        <div class="main-navigation">
+                            <ul class="main-menu">
+                                <li class="menu-item "><a href="#empresa">L'empresa</a></li>
+
+                                <li class="menu-item"><a href="#app">L'app</a></li>
+
+                                <li class="menu-item"><a href="#serveis">Serveis i funcionalitats</a></li>
+
+                                <li class="menu-item"><a href="#contact">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-menu"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Hero Area  -->
+        <section class="hero-area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="hero-image">
+                            <img src="{{ asset('./images/landing/ship.webp') }}" alt="platja">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="hero-content">
+                            <h1>Intrasea</h1>
+                            <p>La plataforma all-in-one per treballadors flexibles.
+                            </p>
+                            <div class="hero-form">
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Introdueix el teu correu">
+                                        <button class="submit-btn"><a href="{{ path('signup') }}">Registre</a></button>
+                                    </div>
+                                    <p class="form-text">Ja tens compte? <a href="{{ path('signin') }}" class="link">Login</a></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <div class="container">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8"><img src="{{ asset('./images/landing/intrasea.png') }}" width="800" alt="" /></div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+
+        <section id= "empresa" class="content-section-01">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-5  col-sm-6 col-10">
+                        <div class="content-img">
+                            <img src="{{ asset('./images/landing/seaLong.webp') }}" alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-xl-5 offset-xl-1 col-sm-6">
+                        <div class="content-right-content">
+                            <h2>L'empresa</h2>
+                            <p>
+                                Intrasea és una empresa que ofereix serveis de viatges dirigits a ports a nivell global i altres empreses de viatges que gestionen creuers. S’encarrega de la logística i gestió de serveis portuaris arreu del món, incloent creuers, passatgers i personal portuari. És una multinacional amb diferents departaments que inclouen una agencia de viatges propia, botigues en ports i transport de mercaderia, ens centrarem en els seus serveis portuaris.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id= "app" class="hero-area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="hero-image">
+                            <img src="{{ asset('./images/landing/laptop.webp') }}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="content-left-content">
+                            <h2>L'app</h2>
+                            <p>L'app d'Intrasea té com a objectiu principal oferir un espai on els empleats podrán realitzar totes les seves funcions de forma ràpida i intuitiva, facilitant la coordinació general i permetent treballar de forma flexible i completament online. És una plataforma d’organització de recursos humans, dirigida a una empresa amb empleats que tenen un horari lliure i flexible.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section id= "serveis" class="content-section-02">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-5 offset-xl-1 col-sm-6 col-10 order-sm-2">
+                        <div class="content-img">
+                            <img src="{{ asset('./images/landing/team.jpg') }}" alt="equip">
+                        </div>
+                    </div>
+                    <div class="col-xl-5  col-sm-6 order-sm-1">
+                        <div class="content-left-content">
+                            <h2 id="serveis">Funcionalitats</h2>
+                            <ul class="content-list">
+                                <li>
+                                    <span><i class="icon icon-check-2"></i></span>Compartir la teva disponibilitat, amb un calendari interactiu.
+                                </li>
+                                <li>
+                                    <span><i class="icon icon-check-2"></i></span>Informe personalitzat amb les dades que més t'interessen, com ara la nomina
+                                </li>
+                                <li>
+                                    <span><i class="icon icon-check-2"></i></span>Un perfil personal i complert amb les teves dades
+                                </li>
+                                <li>
+                                    <span><i class="icon icon-check-2"></i></span>Gestió completa sobre les teves operacions
+                                </li>
+                                <li>
+                                    <span><i class="icon icon-check-2"></i></span>Vista interactiva amb totes les teves tasques per una organització ràpida i senzilla
+                                </li>
+                                <li>
+                                    <span><i class="icon icon-check-2"></i></span>Sistema de notificacions i missatgeria entre els membres de la plataforma
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+        </section>
+
+
+        <!-- Footer Section 06 -->
+        <div id="contact" class="footer-section">
+            <div class="container">
+                <div class="footer-newsletter-section">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 col-xl-8">
+                            <div class="footer-newsletter-content">
+                                <h2>Uneix-te a la revolució</h2>
+                                <p>Hem dissenyat aquest nou producte gràcies a l'opinió dels nostres lectors. Us continuem llegint!</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-xl-6">
+                            <div class="footer-newsletter-form">
+                                <form action="">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Introdueix el teu correu">
+                                        <button class="submit-btn">Vull rebre més informació</button>
+                                    </div>
+                                    <p class="form-text"><i class="icon icon-lock"></i>Les teves dades seran usades per contactar amb tu i res més.</p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-decrese" style="text-align: center;">
+                    <div class="col-xl-4 col-lg-5 col-margin">
+                        <div class="single-footer">
+                            <div class="footer-text">
+                                <p>Una empresa que vol abarcar més amb aquesta nova app, totalment centrada en proporcionar flexibilitat als seus treballadors. </p>
+                            </div>
+                            <ul class="footer-social-list">
+                                <li>
+                                    <a href="https://www.facebook.com">
+                                        <i class="icon icon-logo-fb-simple"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.twitter.com">
+                                        <i class="icon icon-logo-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.cat">
+                                        <i class="icon icon-google"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-6 offset-lg-1 col-margin">
+                        <div class="single-footer">
+                            <div class="footer-title">
+                                <h6>Mapa de la web</h6>
+                            </div>
+                            <ul class="footer-list">
+                                <li><a href="#empresa">L'empresa</a></li>
+                                <li><a href="#app">L'app</a></li>
+                                <li><a href="#serveis">Serveis i funcionalitats</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-6 col-margin">
+                        <div class="single-footer">
+                            <div class="footer-title">
+                                <h6>Contacte</h6>
+                            </div>
+
+
+                            <ul class="footer-list">
+                                <li><i class="fas fa-envelope mr-1"></i><a>intrasea@gmail.com</a></li>
+                                <li><i class="fas fa-phone mr-1"></i><a>987876768</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin: 0px auto; font-weight: bold;">
+                        <p>© 2020 - Ismail Ait, Sonia Vargas</p>
+                        <p>Intrasea</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+<!-- JS -->
+{% block javascripts %}
+    {{ encore_entry_script_tags('landing2') }}
+{% endblock %}
+
+</body>
+
+</html>

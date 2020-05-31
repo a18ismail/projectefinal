@@ -1,0 +1,111 @@
+{% block modalOperationAvailableDetail %}
+
+    <div class="modal fade" id="{{ operation.code }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detall de la Operativa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <h5 class="mt-0 mb-1">{{ operation.title }}</h5>
+                                <p>{{ operation.description }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                    <button data-id="{{ operation.code }}" type="button" class="btn btn-block btn-outline-success btn-lg assignOperation">Assignar-me aquesta operativa</button>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-info-circle fa-align-justify mr-1"></i>
+                                    Tipus:
+                                </h5>
+                                <p>{{ operation.type }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-info-circle fa-align-justify mr-1"></i>
+                                    Estat de l'operativa:
+                                </h5>
+                                <p>
+                                    Disponible
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-coins fa-align-justify mr-1"></i>
+                                    Paga per hora:
+                                </h5>
+                                <p>{{ operation.hourlyPay }} € / hora</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-user-clock fa-align-justify mr-1"></i>
+                                    Duració:
+                                </h5>
+                                <p>
+                                    {# OPERACIO DATES #}
+                                    {% set difference = date(operation.dateEnd).diff(date(operation.dateStart)) %}
+                                    {% set leftHours = difference.h %}
+                                    {% if leftHours > 24 %}
+                                        Més de 24 hores
+                                    {% else %}
+                                        {{ leftHours }} hores
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-clock fa-align-justify mr-1"></i>
+                                    Data d'inici:
+                                </h5>
+                                <p>{{ operation.dateStart|date("F j, Y - g:i a") }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-stopwatch fa-align-justify mr-1"></i>
+                                    Data final:
+                                </h5>
+                                <p>{{ operation.dateEnd|date("F j, Y - g:i a") }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-map-marked fa-align-justify mr-1"></i>
+                                    Localització:
+                                </h5>
+                                <p>Nom del port: {{ operation.port.name }}</p>
+                                <p>Codi: {{ operation.port.code }}</p>
+                                <p>País: {{ operation.port.country }}</p>
+                                <p>Ciutat: {{ operation.port.city }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

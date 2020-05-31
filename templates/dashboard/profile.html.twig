@@ -39,13 +39,13 @@
                             <!-- Widget user -->
                             <div class="card card-widget widget-user">
                                 <div class="widget-user-header text-white"
-                                     style="background: url('https://madridsecreto.co/wp-content/uploads/2020/04/foto-madrid-alcala-henares.jpg') center center;">
+                                     style="background: url('{{ asset('./images/landing') }}') center center;">
                                     <h3 class="widget-user-username text-right"> {{ employee.name }} </h3>
                                     <h5 class="widget-user-desc text-right"> {{ employee.surnames }} </h5>
                                 </div>
                                 <div class="widget-user-image">
                                     <img class="img-circle elevation-2"
-                                         src="https://cdn3.f-cdn.com/contestentries/1376995/30494909/5b566bc71d308_thumb900.jpg"
+                                         src="{{ asset('./images/profiles/profile_image_stock01.png') }}"
                                          alt="User Avatar">
                                 </div>
                                 <div class="card-footer">

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Error - InterSea{% endblock %}</title>
+    <!-- CSS -->
+    {% include('headers/templateCSS.html.twig') %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('signin') }}
+    {% endblock %}
+</head>
+<body class="hold-transition login-page">
+{% block body %}
+    <div class="login-box">
+        <div class="login-logo">
+            <a><b> Hi ha hagut un error amb la teva sessió! <a href="{{ path('signin') }}">Torna a intentar-ho</a></b></a>
+        </div>
+    </div>
+    <!-- /.login-box -->
+{% endblock %}
+<!-- JS -->
+{% block javascripts %}
+    {{ encore_entry_script_tags('signin') }}
+{% endblock %}
+
+</body>
+
+</html>

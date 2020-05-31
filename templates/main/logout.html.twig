@@ -1,15 +1,29 @@
-{% extends 'baseLanding.html.twig' %}
-
-{% block title %}App - Logout{% endblock %}
-
-{% block body %}
-
-    {% block header %}
-        {{ include('menu/navBar.html.twig', {'login_status': login_status}) }}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Logout - InterSea{% endblock %}</title>
+    <!-- CSS -->
+    {% include('headers/templateCSS.html.twig') %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('signin') }}
     {% endblock %}
-
-    <main role="main" class="container">
-        <h1 class="mt-5">Logout Correcte</h1>
-    </main>
-
+</head>
+<body class="hold-transition login-page">
+{% block body %}
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="{{ path('index') }}"><b> Sessió tancada correctament. </b></a>
+        </div>
+    </div>
+    <!-- /.login-box -->
 {% endblock %}
+<!-- JS -->
+{% block javascripts %}
+    {{ encore_entry_script_tags('signin') }}
+{% endblock %}
+
+</body>
+
+</html>

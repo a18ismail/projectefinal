@@ -21,9 +21,26 @@ class MainController extends AbstractController
      */
     public function index()
     {
-        return $this->render('main/landingLayout.html.twig', [
+/*        return $this->render('main/landingLayout.html.twig', [
             'login_status' => false,
-        ]);
+        ]);*/
+        return $this->render('baseStart.html.twig');
+    }
+
+    /**
+     * @Route("/signin", name="signin")
+     */
+    public function signin()
+    {
+        return $this->render('main/signin.html.twig');
+    }
+
+    /**
+     * @Route("/signup", name="signup")
+     */
+    public function signup()
+    {
+        return $this->render('main/signup.html.twig');
     }
 
     /**
@@ -44,7 +61,7 @@ class MainController extends AbstractController
 
         if ( sizeof($employees) == 0 ){
             //Email incorrecte o error en emmagatzemar empleat
-            return $this->render('main/errorDades.html.twig', [
+            return $this->render('main/signError.html.twig', [
                 'login_status' => false,
             ]);
         } else{
@@ -66,7 +83,7 @@ class MainController extends AbstractController
                 //Redirigir a Dashboard
                 return new RedirectResponse($this->generateUrl('dashboard'));
             }else{
-                return $this->render('main/errorDades.html.twig', [
+                return $this->render('main/signError.html.twig', [
                     'login_status' => false,
                 ]);
             }

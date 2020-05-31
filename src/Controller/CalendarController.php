@@ -128,8 +128,7 @@ class CalendarController extends AbstractController
         }
     }
 
-    //TODO
-    //CHECK AVAILABILITY OF EMPLOYEE BEFORE ADDING A NEW OPERATION
+
 
 
 }

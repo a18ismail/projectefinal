@@ -39,6 +39,20 @@ import caLocale from '@fullcalendar/core/locales/ca';
 import axios from 'axios/dist/axios';
 import toastr from 'toastr/toastr.js';
 
+//Funció generalitzada per enviar una petició per assignar, eliminar i confirmar operatives operatives
+function setOperation(url, code){
+    axios.post(url, {
+        operationCode: code
+    })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
+            console.log(error);
+        });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
     //Funció per obtenir operatives utilitzant promises
@@ -80,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
             updateButton: {
                 text: 'Actualitzar',
                 click: function() {
-                    console.log('vull actualitzar');
                     calendar.removeAllEvents();
                     load();
                     toastr.success('Calendari actualitzat correctament!');
@@ -104,7 +117,6 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         events: [],
         eventClick:  function(info) {
-            console.log(info.event.id);
             $('#'+info.event.id).modal('show');
         }
     });
@@ -130,4 +142,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Mostrar calendari
     calendar.render();
+
+    //Carregar funcionalitats dels modals de cada operativa
+    //Per assignar una operativa disponible
+    var assignOperationButtons = document.getElementsByClassName('assignOperation');
+
+    Array.from(assignOperationButtons).forEach(function(button) {
+        let operationCode = button.getAttribute('data-id');
+        button.addEventListener('click', function () {
+            setOperation('assignOperation', operationCode);
+        }, operationCode);
+    });
+
+    //Per eliminar una operativa assignada
+    var deleteOperationButtons = document.getElementsByClassName('deleteOperation');
+
+    Array.from(deleteOperationButtons).forEach(function(button) {
+        let operationCode = button.getAttribute('data-id');
+        button.addEventListener('click', function () {
+            setOperation('deleteOperation', operationCode);
+        }, operationCode);
+    });
+
+    //Per confirmar una operativa assignada
+    var confirmOperationButtons = document.getElementsByClassName('confirmOperation');
+
+    Array.from(confirmOperationButtons).forEach(function(button) {
+        let operationCode = button.getAttribute('data-id');
+        button.addEventListener('click', function () {
+            setOperation('confirmOperation', operationCode);
+        }, operationCode);
+    });
+
 });
