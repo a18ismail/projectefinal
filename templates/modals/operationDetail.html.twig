@@ -17,6 +17,18 @@
                                 <p>{{ relation.operation.description }}</p>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {% if relation.status == 'confirmed' or relation.status == 'reserved' %}
+                                    <button id="deleteOperation" type="button" class="btn btn-block btn-outline-danger btn-lg">Eliminar aquesta operativa</button>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {% if relation.status != 'confirmed' and relation.status != 'reserved' %}
+                                    <button id="assignOperation" type="button" class="btn btn-block btn-outline-success btn-lg">Assignar-me aquesta operativa</button>
+                                {% endif %}
+                            </div>
+                        </div>
                         <div class="row mb-2">
                             <div class="col-sm-12">
                                 <h5 class="mt-0 mb-1">
@@ -24,6 +36,23 @@
                                     Tipus:
                                 </h5>
                                 <p>{{ relation.operation.type }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h5 class="mt-0 mb-1">
+                                    <i class="fas fa-lg fa-info-circle fa-align-justify mr-1"></i>
+                                    Estat de l'operativa:
+                                </h5>
+                                <p>
+                                    {% if relation.status == 'confirmed' %}
+                                        Assignada
+                                    {% elseif relation.status == 'reserved' %}
+                                        Reservada
+                                    {% else %}
+                                        Disponible
+                                    {% endif %}
+                                </p>
                             </div>
                         </div>
                         <div class="row mb-2">

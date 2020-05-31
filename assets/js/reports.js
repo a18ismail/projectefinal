@@ -2,14 +2,13 @@
 
 //IMPORTACIONS CSS PLUGINS
 import 'admin-lte/plugins/fontawesome-free/css/all.css';
-import 'admin-lte/plugins/jqvmap/jqvmap.css';
 import 'admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
 
 //IMPORTACIONS CSS PLANTILLA
 import '../css/adminlte.css';
 
 //CSS PERSONALITZAT D'AQUESTA PAGINA
-import '../css/app.css'
+import '../css/reports.css'
 
 // ASSETS JS
 
@@ -17,63 +16,89 @@ import '../css/app.css'
 import 'admin-lte/plugins/jquery/jquery';
 import 'admin-lte/plugins/jquery-ui/jquery-ui.min';
 import 'admin-lte/plugins/bootstrap/js/bootstrap.bundle.min';
-import 'admin-lte/plugins/jqvmap/jquery.vmap.js';
-import 'admin-lte/plugins/jqvmap/maps/jquery.vmap.europe.js';
-import 'admin-lte/plugins/jquery-knob/jquery.knob.min.js';
 import 'admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min';
-
 
 //IMPORTS JS PLANTILLA
 import './adminlte.js';
-import './pages/dashboard.js';
 
 //JS PERSONALITZAT D'AQUESTA PAGINA
+import axios from 'axios/dist/axios';
+import toastr from 'toastr/toastr.js';
 
-//Càlcul del rellotge
-function currentTime() {
-    var date = new Date(); /* creating object of Date class */
-    var hour = date.getHours();
-    var min = date.getMinutes();
-    var sec = date.getSeconds();
-    hour = updateTime(hour);
-    min = updateTime(min);
-    sec = updateTime(sec);
-    document.getElementById("clock").innerText = "  " + hour + " : " + min + " : " + sec; /* adding time to the div */
-    var t = setTimeout(function(){ currentTime() }, 1000); /* setting timer */
+function getCompletedHours(){
+    return axios.get('getCompletedHours')
+        .then( response => {
+            if( response!='false' ){
+                var receivedData = response.data;
+                return receivedData;
+            }else{
+                toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
+            }
+        })
+        .catch( error => {
+            toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
+            console.log(error);
+        });
 }
 
-function updateTime(k) {
-    if (k < 10) {
-        return "0" + k;
-    }
-    else {
-        return k;
-    }
+function loadWorkedHours(){
+    getCompletedHours().then( data => {
+        document.getElementById('hoursCompleted').innerHTML = data;
+        if( data == 0 ){
+            document.getElementById('hoursCompletedProgress').setAttribute('style', 'width: 0%');
+        }else if( data >=1 && data <=10 ){
+            document.getElementById('hoursCompletedProgress').setAttribute('style', 'width: 10%');
+        }else if( data >=50 && data <=70 ){
+            document.getElementById('hoursCompletedProgress').setAttribute('style', 'width: 50%');
+        }else if( data >=80 && data <=100 ){
+            document.getElementById('hoursCompletedProgress').setAttribute('style', 'width: 70%');
+        }else if( data >=90 && data <=110 ){
+            document.getElementById('hoursCompletedProgress').setAttribute('style', 'width: 88%');
+        }else if( data >=111 && data <=119 ){
+            document.getElementById('hoursCompletedProgress').setAttribute('style', 'width: 90%');
+        }else if( data >=120 ){
+            document.getElementById('hoursCompletedProgress').setAttribute('style', 'width: 100%');
+        }
+    })
 }
 
-currentTime();
+function getSalaryData(){
+    return axios.get('getSalaryData')
+        .then( response => {
+            if( response!='false' ){
+                var receivedData = response.data;
+                return receivedData;
+            }else{
+                toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
+            }
+        })
+        .catch( error => {
+            toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
+            console.log(error);
+        });
+}
+
+function loadSalaryData(){
+    getSalaryData().then( salaryObject => {
+        console.log(salaryObject);
+        document.getElementById('totalIncomeMonth').innerText = salaryObject.totalIncomeMonth + " €";
+        document.getElementById('totalIncomeYear').innerText = salaryObject.totalIncomeYear + " €";
+        document.getElementById('totalIncomeLastMonth').innerText = salaryObject.totalIncomeLastMonth + " €";
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    /*getRemainingTimeOperation().then( data => {
+        //console.log(data);
+        displayCountdownClock(data);
+    })*/
+
+    //Carregar gràfica d'hores treballades
+    loadWorkedHours();
+
+    //Carregar dades d'estadistiques
+    loadSalaryData();
+})
 
 
-///////////////////////////////////////////////////////////////////////////////////
-
-//IMPORTS DISPONIBLES JS (No estan tots aqui)
-//import 'admin-lte/plugins/jquery/jquery';
-//import 'admin-lte/plugins/jquery-ui/jquery-ui.min';
-//import 'admin-lte/plugins/bootstrap/js/bootstrap.bundle.min';
-//import 'moment/dist/moment.js';
-//import 'admin-lte/plugins/chart.js/Chart.min';
-//import 'admin-lte/plugins/sparklines/sparkline';
-//import 'admin-lte/plugins/jquery-knob/jquery.knob.min';
-//import 'admin-lte/plugins/daterangepicker/daterangepicker';
-//import 'admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min';
-//import 'admin-lte/plugins/summernote/summernote-bs4.min';
-//import 'admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min';
-
-//IMPORTS DISPONIBLES CSS (No estan tots aqui)
-//import 'admin-lte/plugins/fontawesome-free/css/all.min.css';
-//import 'admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css';
-//import 'admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
-//import 'admin-lte/plugins/jqvmap/jqvmap.min.css';
-//import 'admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
-//import 'admin-lte/plugins/daterangepicker/daterangepicker.css';
-//import 'admin-lte/plugins/summernote/summernote-bs4.css';

@@ -83,6 +83,18 @@
                                             </tr>
                                         {% endfor %}
 
+                                        {% for operation in freeOperations %}
+                                            <tr>
+                                                <td>{{ operation.code }}</td>
+                                                <td>{{ operation.title }}</td>
+                                                <td>{{ operation.dateStart|date("d/m/Y") }}</td>
+                                                <td>Disponible</td>
+                                                <td>
+                                                    <button type="button" data="{{ operation.code }}" id="btn-{{ operation.code }}" class="btn btn-primary"> Detalls </button>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
                                         </tbody>
                                     </table>
                                 </div>

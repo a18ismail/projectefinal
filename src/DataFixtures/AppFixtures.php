@@ -104,15 +104,15 @@ class AppFixtures extends Fixture
         for ($i=1; $i<=$numEmployees; $i++){
             //Load Simple employees
             $name = 'Usuari '.$i;
-            $surnames = 'Cognoms';
+            $surnames = 'Smith';
             $email = 'user_'.$i.'_mail@gmail.com';
             $password = password_hash('password', PASSWORD_DEFAULT);
-            $nif = "XXXXXXXXX".$i;
+            $nif = "8754965".$i;
             $phoneNumber = $i.$i.$i.$i.$i.$i.$i.$i.$i;
             $birthday = new \DateTime('@'.strtotime('now'));
             $address = "C/ Rambla Gran 14 Barcelona, Espanya";
-            $postcode = 12458;
-            $nss = "123456789";
+            $postcode = 8447;
+            $nss = "4477885521";
             $notes = "Afegeix més informació sobre tu!";
             $sns_twitter = "https://www.twitter.com";
             $sns_linkedin = "https://www.linkedin.com";
@@ -137,21 +137,25 @@ class AppFixtures extends Fixture
             $addOperationToEmployee01->setEmployee($employee);
             $addOperationToEmployee01->setOperation($operativa01);
             $addOperationToEmployee01->setStatus('confirmed');
+            $addOperationToEmployee01->setRealDuration('5');
 
             $addOperationToEmployee02 = new EmployeeHasOperation();
             $addOperationToEmployee02->setEmployee($employee);
             $addOperationToEmployee02->setOperation($operativa02);
             $addOperationToEmployee02->setStatus('confirmed');
+            $addOperationToEmployee02->setRealDuration('5');
 
             $addOperationToEmployee03 = new EmployeeHasOperation();
             $addOperationToEmployee03->setEmployee($employee);
             $addOperationToEmployee03->setOperation($operativa03);
             $addOperationToEmployee03->setStatus('confirmed');
+            $addOperationToEmployee03->setRealDuration('5');
 
             $addOperationToEmployee04 = new EmployeeHasOperation();
             $addOperationToEmployee04->setEmployee($employee);
             $addOperationToEmployee04->setOperation($operativa04);
-            $addOperationToEmployee04->setStatus('reserved');
+            $addOperationToEmployee04->setStatus('completed');
+            $addOperationToEmployee04->setRealDuration('5');
 
             $manager->persist($addOperationToEmployee01);
             $manager->persist($addOperationToEmployee02);
@@ -159,6 +163,28 @@ class AppFixtures extends Fixture
             $manager->persist($addOperationToEmployee04);
 
         }
+
+        $operativa = new Operation();
+        $operativa->setTitle('Ajudant de guardamolls')
+            ->setType('Personal portuari')
+            ->setCode('PRC04')
+            ->setDateStart(new \DateTime('@'.strtotime('+20 days')))
+            ->setDateEnd(new \DateTime('@'.strtotime('+10 hours')))
+            ->setHourlyPay(10)
+            ->setPort($portBCN)
+            ->setDescription('Operativa disponibleee');
+        $manager->persist($operativa);
+
+        $operativa = new Operation();
+        $operativa->setTitle('Passager helper')
+            ->setType('Personal portuari')
+            ->setCode('PRC05')
+            ->setDateStart(new \DateTime('@'.strtotime('+1 day')))
+            ->setDateEnd(new \DateTime('@'.strtotime('+2 hours')))
+            ->setHourlyPay(14)
+            ->setPort($portBCN)
+            ->setDescription('Operativa disponibleee');
+        $manager->persist($operativa);
 
         $manager->flush();
     }

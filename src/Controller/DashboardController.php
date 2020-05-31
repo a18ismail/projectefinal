@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Employee;
+use App\Entity\EmployeeHasOperation;
 use App\Entity\Operation;
 use App\Repository\EmployeeRepository;
 use App\Service\LoginValidator;
@@ -73,12 +74,16 @@ class DashboardController extends AbstractController
     {
         $employee = $this->loginValidator->checkLogin();
 
+        $relationRepository = $this->getDoctrine()->getRepository(EmployeeHasOperation::class);
+
+        $freeOperations = $this->getDoctrine()->getRepository(Operation::class)->findAllAvailableOperations($relationRepository);
+
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [
                 'login_status' => false,
             ]);
         }else {
-            return $this->render('dashboard/operationsList.html.twig', ['employee' => $employee]);
+            return $this->render('dashboard/operationsList.html.twig', ['employee' => $employee, 'freeOperations' => $freeOperations]);
         }
     }
 
@@ -152,6 +157,8 @@ class DashboardController extends AbstractController
     public function personalReport(Request $request)
     {
         $employee = $this->loginValidator->checkLogin();
+
+        //TODO GET COMPLETED OPERATIONS ONLY
 
         if( is_null($employee) ){
             return $this->render('main/errorLogin.html.twig', [

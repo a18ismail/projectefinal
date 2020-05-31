@@ -28,6 +28,9 @@ import './adminlte.js';
 import './pages/dashboard.js';
 
 //JS PERSONALITZAT D'AQUESTA PAGINA
+import axios from 'axios/dist/axios';
+import toastr from 'toastr/toastr.js';
+
 
 //Càlcul del rellotge
 function currentTime() {
@@ -51,7 +54,68 @@ function updateTime(k) {
     }
 }
 
-currentTime();
+function getRemainingTimeOperation(){
+    return axios.get('getRemainingTimeOperation')
+        .then( response => {
+            if( response!='false' ){
+                var receivedData = response.data;
+                return receivedData;
+            }else{
+                toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
+            }
+        })
+        .catch( error => {
+            toastr.error('Hi ha hagut un error al servidor! Torna-ho a intentar.', 'Error de connexió!');
+            console.log(error);
+        });
+}
+
+function displayCountdownClock(date){
+
+    //Definir la data on acaba el contador
+    var countDownDate = new Date(date).getTime();
+
+    //Definir l'interval per actualitzar el rellotge
+    var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById('clockLeft').innerText = "Contador expirat";
+        }else{
+            if( days > 0 ){
+                document.getElementById('clockLeft').innerText = days + " dies " + hours + " hores " + minutes + " minuts " + seconds + " segons ";
+            }else{
+                document.getElementById('clockLeft').innerText = hours + " hores " + minutes + " minuts " + seconds + " segons ";
+            }
+        }
+
+    }, 1000);
+}1
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    //Carregar contador per la proxima operativa
+    getRemainingTimeOperation().then( data => {
+        console.log(data);
+        displayCountdownClock(data);
+    })
+
+    //Carregar hora actual
+    currentTime();
+})
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////

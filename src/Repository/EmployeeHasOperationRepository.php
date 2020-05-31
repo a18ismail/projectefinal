@@ -19,6 +19,15 @@ class EmployeeHasOperationRepository extends ServiceEntityRepository
         parent::__construct($registry, EmployeeHasOperation::class);
     }
 
+    public function findAvailableRelations()
+    {
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->andWhere('r.status IS NULL OR r.status = :available')
+            ->setParameter('available', 'available');;
+        $query = $queryBuilder->getQuery($queryBuilder);
+        return $query->execute();
+    }
+
     // /**
     //  * @return EmployeeHasOperation[] Returns an array of EmployeeHasOperation objects
     //  */

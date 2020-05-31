@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\EmployeeHasOperation;
 use App\Entity\Operation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +18,24 @@ class OperationRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Operation::class);
+    }
+
+    public function findAllAvailableOperations(EmployeeHasOperationRepository $relationRepository)
+    {
+
+        $allOperations = $relationRepository->findAll();
+
+        $ids = array();
+        foreach($allOperations as $op) {
+            $ids[] = $op->getOperation()->getId();
+        }
+
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->andWhere('o.id NOT IN (:allOperations)')
+            ->setParameter('allOperations', $ids);
+
+        $query = $queryBuilder->getQuery($queryBuilder);
+        return $query->execute();
     }
 
     // /**
