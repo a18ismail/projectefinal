@@ -23,26 +23,14 @@ class WidgetController extends AbstractController
         $this->loginValidator = $validator;
     }
 
-    //CONSEGUIR NOMBRE DE OPERATIVES ASSIGNADES
-    /**
-     * @Route("/widget", name="widget")
-     */
-    public function getOperationsCountByEmployee(Request $request)
-    {
-/*        $session = $request->getSession();
-        $employee_id = $session->get('id');
 
-        $employee = $this->getDoctrine()->getRepository(Employee::class)->find($employee_id);
-        var_dump( sizeof( $employee->getEmployeeHasOperations() ) );*/
-    }
-
-
-    //CONSEGUIR TEMPS RESTANT PER LA PROXIMA OPERATIVA
     /**
      * @Route("/getRemainingTimeOperation", name="getRemainingTimeOperation")
      */
     public function getRemainingTimeOperation()
     {
+        //CONSEGUIR TEMPS RESTANT PER LA PROXIMA OPERATIVA
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
@@ -50,6 +38,7 @@ class WidgetController extends AbstractController
         }else {
             $relations = $employee->getEmployeeHasOperations();
 
+            //Recorrer l'aray de relacions entre Empleat i Operativa per aconseguir el temps restant
             $operationsArray = array();
             foreach ($relations as $relation){
                 $operation = $relation->getOperation();
@@ -57,11 +46,13 @@ class WidgetController extends AbstractController
                 $dateStart = $operation->getDateStart();
                 $dateToday = new \DateTime('@'.strtotime('now'));
 
+                //Afegir a un array les operatives més properes
                 if( $dateStart > $dateToday ){
                     $operationsArray[] = array('dateStart' => $dateStart);
                 }
             }
 
+            //Ordenar operatives per la data
             usort($operationsArray, function($a, $b) {
                 return ($a['dateStart'] < $b['dateStart']) ? -1 : 1;
             });
@@ -77,20 +68,23 @@ class WidgetController extends AbstractController
         }
     }
 
-
-    //CONSEGUIR HORES TREBALLADES
     /**
      * @Route("/getCompletedHours", name="getCompletedHours")
      */
     public function getCompletedHours()
     {
+        //CONSEGUIR HORES TREBALLADES
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return new Response('false');
         }else {
+
+            //Conseguir les operatives de l'empleat
             $relations = $employee->getEmployeeHasOperations();
 
+            //Acomular les hores segons la duració de les operatives
             $totalHours = 0;
             foreach ($relations as $relation){
                 $relationDuration = $relation->getRealDuration();
@@ -108,31 +102,37 @@ class WidgetController extends AbstractController
         }
     }
 
-
-    //INGRESOS -> TOTAL, NET, MES PASSAT, TOTAL ANUAL
     /**
      * @Route("/getSalaryData", name="getSalaryData")
      */
     public function getSalaryData()
     {
+        //Conseguir dades sobre les oepratives realitzades
+        //Es mostra al informe personal
+        //INGRESOS -> TOTAL, NET, MES PASSAT, TOTAL ANUAL
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return new Response('false');
         }else {
+            //Conseguir totes les operatives
             $relations = $employee->getEmployeeHasOperations();
 
             $totalIncomeMonth = 0;
             $totalIncomeYear = 0;
             foreach ($relations as $relation){
+                //A partir de les relacions recorrem les operatives
                 $operation = $relation->getOperation();
 
                 //Filtrem l'any actual
                 if( $operation->getDateStart()->format('Y') == date('Y') && $relation->getStatus() == 'completed' ){
 
+                    //Conseguim la duració real i la paga per hora
                     $relationDuration = $relation->getRealDuration();
                     $operationHourlyPay = $operation->getHourlyPay();
 
+                    //Sumem al resultat i filtrem per any i per mes per aconseguir els dos totals
                     if( !is_null($operationHourlyPay) && !is_null($relationDuration) ){
 
                         $totalIncomeYear += ($operationHourlyPay * $relationDuration);

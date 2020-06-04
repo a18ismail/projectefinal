@@ -26,6 +26,8 @@ class CalendarController extends AbstractController
      */
     public function getCalendarOperationsEvents(Request $request)
     {
+        //Operatives actuals i disponibles en forma d'events formatejats pel frontend/calendari interactiu
+
         //Conseguir dades de l'empleat registrat
         $employee = $this->loginValidator->checkLogin();
 
@@ -64,6 +66,8 @@ class CalendarController extends AbstractController
      */
     public function saveAvailability(Request $request)
     {
+        //Disponibilitat de l'empleat rebuda del frontend i formatejada per emmagatzemar a la BD
+
         //Conseguir empleat registrat
         $employee = $this->loginValidator->checkLogin();
 
@@ -91,6 +95,7 @@ class CalendarController extends AbstractController
             $employee->setAvailability($arrayAvailability);
             $entityManager->flush();
 
+            //Enviar resposta
             return new Response('Guardada correctament.');
         }
 
@@ -101,16 +106,20 @@ class CalendarController extends AbstractController
      */
     public function getAvailability()
     {
+        //Enviar la disponibilitat de l'empleat emmagatzemada a la BD cap al frontend
+
         //Conseguir empleat registrat
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return new Response('Hi ha hagut un error amb la teva petició.');
         }else {
-            $savedArray = $employee->getAvailability();
 
+            //Emmagatzemar events de disponibilitat en un array
+            $savedArray = $employee->getAvailability();
             $arrayAvailability = array();
 
+            //Formatejar disponibilitat en events
             foreach ($savedArray as $item){
                 $event = array(
                     'dateStart' => $item['dateStart'],
@@ -124,7 +133,6 @@ class CalendarController extends AbstractController
 
             //Enviar la resposta
             return $response;
-
         }
     }
 

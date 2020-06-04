@@ -19,6 +19,8 @@ class MailController extends AbstractController
         $this->loginValidator = $validator;
     }
 
+    //TODO
+    //SISTEMA DE MISSATGERIA
     /**
      * @Route("/getMessages", name="getMessages")
      */
@@ -74,8 +76,6 @@ class MailController extends AbstractController
 
 
         }
-        return $this->render('mail/index.html.twig', [
-            'controller_name' => 'MailController',
-        ]);
+        return new Response('true');
     }
 }

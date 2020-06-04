@@ -65,7 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Descarregar dades de l'empleat registrat
     document.getElementById('downloadData').addEventListener('click', function () {
-        var formData = {
+
+        toastr.warning('Aquesta funcionalitat és per la versió PRO de la plataforma!');
+
+        //Petició per demanar descarrega de dades
+        /*var formData = {
             email: document.getElementById('email').value
         }
         let urlProd = window.location.host + '/downloadEmployeeData';
@@ -77,9 +81,14 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(function (error) {
                 console.log(error);
-            });
+            });*/
 
         //downloadObjectAsJson();
+    })
+
+    //Eliminar compte
+    document.getElementById('deleteAccount').addEventListener('click', function () {
+        toastr.warning('Aquesta funcionalitat és per la versió PRO de la plataforma!');
     })
 
     //Funció per crear un fitxer .JSON amb les dades rebudes

@@ -21,9 +21,8 @@ class MainController extends AbstractController
      */
     public function index()
     {
-/*        return $this->render('main/landingLayout.html.twig', [
-            'login_status' => false,
-        ]);*/
+        //Métode principal
+        //Enruta la web a la Landing page
         return $this->render('baseStart.html.twig');
     }
 
@@ -32,6 +31,7 @@ class MainController extends AbstractController
      */
     public function signin()
     {
+        //Enruta a la pàgina per fer Login
         return $this->render('main/signin.html.twig');
     }
 
@@ -40,6 +40,7 @@ class MainController extends AbstractController
      */
     public function signup()
     {
+        //Enruta a la pàgina per registrar-se
         return $this->render('main/signup.html.twig');
     }
 
@@ -48,6 +49,9 @@ class MainController extends AbstractController
      */
     public function login(Request $request)
     {
+        //Login des d'una petició feta des del frontend
+        //Es comproven les dades i s'inicia la sessió a la web
+
         //Tanquem la session cada vegada que s'intenta fer login
         $session = new Session();
         $session->clear();
@@ -59,6 +63,7 @@ class MainController extends AbstractController
         //Comprobar dades de Empleat
         $employees = $this->getDoctrine()->getRepository(Employee::class)->checkEmployeeLogin($email);
 
+        //Comprovar resultats del procés anterior
         if ( sizeof($employees) == 0 ){
             //Email incorrecte o error en emmagatzemar empleat
             return $this->render('main/signError.html.twig', [
@@ -83,6 +88,7 @@ class MainController extends AbstractController
                 //Redirigir a Dashboard
                 return new RedirectResponse($this->generateUrl('dashboard'));
             }else{
+                //Redirigir i mostrar error
                 return $this->render('main/signError.html.twig', [
                     'login_status' => false,
                 ]);
@@ -97,9 +103,13 @@ class MainController extends AbstractController
      */
     public function register(Request $request)
     {
+        //Registre a la web amb una petició feta des del frontend
+        //Es comproven les dades rebudes i s'emmagatzema el nou usuari/empleat
+
         //Rebre dades formulari de registre i netejar-les
         $data = $request->getContent();
 
+        //Descodificar les dades i emmagatzemar-les
         $JSONData = json_decode($data);
         $formData = json_decode($JSONData->data);
 
@@ -108,26 +118,28 @@ class MainController extends AbstractController
         $name = $formData->registerName;
         $surnames = $formData->registerSurnames;
 
+        //Utilitzar un Manager ja que el backend es basa en el sistema ORM
         $entityManager = $this->getDoctrine()->getManager();
 
+        //Creació del nou objecte que defineix el nou usuari/empleat
         $newEmployee = new Employee();
         $newEmployee->setName($name);
         $newEmployee->setSurnames($surnames);
-        $newEmployee->setNif('XXXXXXXXX');
-        $newEmployee->setPhoneNumber(1111111111);
+        $newEmployee->setNif('12345678Y');
+        $newEmployee->setPhoneNumber(123456789);
         $newEmployee->setEmail($email);
         $newEmployee->setPassword( password_hash($password, PASSWORD_DEFAULT) );
 
-        //TODO
-        //CHECK IF EMAIL EXISTS ALREADY
-
+        //Emmagatzemar el nou usuari/empleat
         $entityManager->persist($newEmployee);
         $entityManager->flush();
 
+        //Comprovar que s'ha emmagatzemar correctament
         $employees = $this->getDoctrine()->getRepository(Employee::class)->checkEmployeeLogin($email);
 
+        //Enviar resposta al frontend
         if ( sizeof($employees) == 0 ){
-            //Email incorrecte/error en emmagatzemar empleat
+            //Email incorrecte/ja existeix o error en emmagatzemar empleat
             return new Response('false');
         } else{
             return new Response('true');
@@ -139,10 +151,13 @@ class MainController extends AbstractController
      */
     public function logout(Request $request)
     {
+        //Realitza el logout per l'usuari logejat
+
         //Netejar valors de la sessió activa
         $session = new Session();
         $session->clear();
 
+        //Redirigir amb un missatge
         return $this->render('main/logout.html.twig', [
             'login_status' => false,
         ]);
@@ -153,12 +168,17 @@ class MainController extends AbstractController
      */
     public function changePassword(Request $request)
     {
+        //Canvi de dades de l'usuari/empleat logejat
+        //Aquest métode rep una petició des del frontend
+
         //Rebre contrasenyes del formulari i netejar-les
         $data = $request->getContent();
 
+        //Descodificar les dades rebudes
         $JSONData = json_decode($data);
         $formData = json_decode($JSONData->data);
 
+        //Definir paràmetres necessaris
         $currentPassword = $formData->currentPassword;
         $newPassword = $formData->newPassword;
         $newPasswordConfirm = $formData->newPasswordConfirm;
@@ -167,6 +187,7 @@ class MainController extends AbstractController
         //Conseguir empleat
         $employees = $this->getDoctrine()->getRepository(Employee::class)->checkEmployeeLogin($email);
 
+        //Comprobar el canvi de contrasenya
         if ( sizeof($employees) == 0 ){
             //Email incorrecte/error en empleat
             return new Response('false');
@@ -183,15 +204,18 @@ class MainController extends AbstractController
                     //Codificar contrasenya
                     $passwordToStore = password_hash($newPassword, PASSWORD_DEFAULT);
 
-                    //Afegir contrasenya
+                    //Afegir contrasenya a l'usuari/empleat logejat
                     $employee = $employees[0];
                     $entityManager = $this->getDoctrine()->getManager();
                     $employee->setPassword($passwordToStore);
 
                     $entityManager->flush();
 
+                    //Operació realitzada correctament
                     return new Response('true');
                 }else{
+                    //Hi ha hagut un error
+                    //La contrasenya no s'ha rebut/emmagatzemat correctament
                     return new Response('errorConfirmPassword');
                 }
             }else{
@@ -207,6 +231,11 @@ class MainController extends AbstractController
      */
     public function downloadEmployeeData(Request $request)
     {
+        //TODO
+        //Descarregar dades de l'empleat
+        //Inclouria dades personals, operatives fetes i actuals
+        //També recuperar, formatejar i enviar nòmina i estadistiques personals
+
         $data = $request->getContent();
 
         $JSONData = json_decode($data);
@@ -227,10 +256,10 @@ class MainController extends AbstractController
             $serializer = new Serializer($normalizers, $encoders);
 
             //Convertir objecte Employee a JSON string
-            $JSONEmployee = $serializer->serialize($employees[0], 'json');
+            //$JSONEmployee = $serializer->serialize($employees[0], 'json');
 
             //Enviar objecte convertit
-            return new Response($JSONEmployee);
+            return new Response('false');
         }
     }
 

@@ -17,7 +17,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class DashboardController extends AbstractController
 {
+    //Aquest Controlador s'encarrega d'enrutar els apartats de la web i la seva renderització
 
+    //Aquest objecte és present a tots els controladors
+    //S'encarrega de utilitzar el servei LoginValidator per comprobar l'estat del login abans de fer qualsevol operació
     private $loginValidator;
 
     public function __construct(LoginValidator $validator)
@@ -25,14 +28,12 @@ class DashboardController extends AbstractController
         $this->loginValidator = $validator;
     }
 
-    //TODO
-    //FALTA CONTROL DE PERMISOS/SESSIÓ
-
     /**
      * @Route("/dashboard", name="dashboard")
      */
     public function index(Request $request)
     {
+        //Enruta al panell de control principal
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
@@ -40,6 +41,8 @@ class DashboardController extends AbstractController
                 'login_status' => false,
             ]);
         }else{
+            //Preparar dades per la renderització del menú lateral i la pàgina principal
+
             $assignedOperations = sizeof( $employee->getEmployeeHasOperations() );
             $availableOperations = sizeof( $this->getDoctrine()->getRepository(Operation::class)->findAll() );
 
@@ -56,6 +59,8 @@ class DashboardController extends AbstractController
      */
     public function profile(Request $request)
     {
+        //Enruta al perfil personal de l'usuari/empleat logejat
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
@@ -72,8 +77,11 @@ class DashboardController extends AbstractController
      */
     public function operations(Request $request)
     {
+        //Enruta a la vista de les operacions en llista
+
         $employee = $this->loginValidator->checkLogin();
 
+        //Conseguir les operatives per la renderització
         $relationRepository = $this->getDoctrine()->getRepository(EmployeeHasOperation::class);
 
         $availableOperations = $this->getDoctrine()->getRepository(Operation::class)->findAllAvailableOperations($relationRepository);
@@ -92,6 +100,8 @@ class DashboardController extends AbstractController
      */
     public function calendarOperations(Request $request)
     {
+        //Enruta a la vista de les operatives assignades/disponibles en forma de calendari
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
@@ -108,6 +118,8 @@ class DashboardController extends AbstractController
      */
     public function calendarAvailability(Request $request)
     {
+        //Enruta a la vista de la disponibilitat de l'usuari/empleat logejat en forma de calendari
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
@@ -124,6 +136,8 @@ class DashboardController extends AbstractController
      */
     public function notifications(Request $request)
     {
+        //Enruta a la vista de les notificacions
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
@@ -140,6 +154,8 @@ class DashboardController extends AbstractController
      */
     public function mail(Request $request)
     {
+        //Enruta a la vista dels missatges
+
         $employee = $this->loginValidator->checkLogin();
 
         $allEmployees = $this->getDoctrine()->getRepository(Employee::class)->findAll();
@@ -161,9 +177,9 @@ class DashboardController extends AbstractController
      */
     public function personalReport(Request $request)
     {
-        $employee = $this->loginValidator->checkLogin();
+        //Enruta a la vista de l'informe personal
 
-        //TODO GET COMPLETED OPERATIONS ONLY
+        $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return $this->render('main/signError.html.twig', [
@@ -179,6 +195,8 @@ class DashboardController extends AbstractController
      */
     public function settings(Request $request)
     {
+        //Enruta a la vista de la configuració de la web
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){

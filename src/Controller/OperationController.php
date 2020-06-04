@@ -26,11 +26,15 @@ class OperationController extends AbstractController
      */
     public function assignOperation(Request $request)
     {
+        //Assignar una operativa a l'usuari mitjançant una petició del frontend
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
             return new Response('false');
         }else{
+
+            //Descodificar les dades rebudes
             $data = $request->getContent();
             $JSONData = json_decode($data);
 
@@ -45,6 +49,7 @@ class OperationController extends AbstractController
             $addOperationToEmployee->setStatus('reserved');
             $addOperationToEmployee->setRealDuration('8');
 
+            //Emmagatzemar les noves operatives assignades
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($addOperationToEmployee);
             $manager->flush();
@@ -59,6 +64,8 @@ class OperationController extends AbstractController
      */
     public function deleteOperation(Request $request)
     {
+        //Eliminar una operativa assignada per l'usuari
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){
@@ -93,6 +100,8 @@ class OperationController extends AbstractController
      */
     public function confirmOperation(Request $request)
     {
+        //Confirmar l'asistencia a una operativa reservada
+
         $employee = $this->loginValidator->checkLogin();
 
         if( is_null($employee) ){

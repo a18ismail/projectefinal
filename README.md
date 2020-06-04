@@ -11,6 +11,7 @@ Per instal·lar aquest projecte en local:
 1. Instal·lació de dependencies PHP/Symfony: `composer install`
 2. Instal·lació de dependencies JS/Webpack Encore: `npm install` / `yarn install`
 3. Generació de assets per visualitzar l'aplicació: `npm run dev` / `yarn encore dev`
+*Es recomanable utilitzar `yarn` com a gestionador de paquets
 
 ## Instruccions per desplegar
 

@@ -16,8 +16,6 @@ class ProfileController extends AbstractController
     public function index()
     {
         //AQUEST METODE NO L'UTILITZEM ARA
-        //POTSER PASSEM EL profile() de DashboardController aqui mes en davant
-        //
 
         /*return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController',
@@ -29,9 +27,9 @@ class ProfileController extends AbstractController
      */
     public function editProfile(Request $request)
     {
-        //Aqui actualitzem les dades del empleat registrat
+        //Actualitzem les dades del empleat registrat
 
-        //rebre dades del formulari
+        //Rebre dades del formulari
         $email = $request->get('inputEmail');
         $phone = $request->get('inputPhone');
         $address = $request->get('inputAddress');
@@ -49,7 +47,6 @@ class ProfileController extends AbstractController
         $employee = $entityManager->getRepository(Employee::class)->find($employee_id);
 
         //Fem un update de l'empleat per actualitzar les seves dades
-        
         $employee->setEmail($email);
 
         $employee->setPhoneNumber($phone);
@@ -63,10 +60,9 @@ class ProfileController extends AbstractController
         $entityManager->flush();
         //Finalment enviem una resposta
         return new RedirectResponse($this->generateUrl('profile'));
-        //Ja que aquest metode nomes ha de rebre una petició POST i fer un update, no fem cap render de templates
+
         //Simplement respondem amb una resposta HTTP.
         //Aquesta resposta podra ser rebuda pel JS del perfil
         // i mostrar una alerta/notificacio avisant del resultat per exemple
-
     }
 }
