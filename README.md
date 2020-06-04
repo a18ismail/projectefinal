@@ -1,8 +1,9 @@
 # Projecte Final
 
-Aquesta aplicació ofereix una plataforma de gestió de tasques/operatives dirigida a empleats temporals d'una empresa internacional.
-Idea basada en un repte ofert pel concurs Metropolis FPLabs
-Projecte Final de DAW realitzat per Sonia Vargas i Ismail Ait.
+Aquesta aplicació web ofereix una plataforma de gestió empresarial dirigida a empleats mòvils d'una empresa internacional.
+Idea basada en un repte ofert durant el concurs Metropolis FPLabs.
+
+Projecte Final de Desenvolupament d'Aplicacions Web realitzat per Sonia Vargas i Ismail Ait.
 
 Trobarás la documentació completa [al directori /docs](docs/documentacio.md).
 
