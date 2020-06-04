@@ -162,7 +162,85 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </section>
+
+        <!-- PRICING -->
+        <section class="pricing-section">
+            <div class="shape">
+                <img src="" alt="">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="section-title text-center">
+                            <h2>Revoluciona la teva empresa</h2>
+                            <p>La nostra plataforma és el resultat de numerosos estudis verificats pels nostres clients. Junts revolucionem el mercat laboral.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-tab-wrapper monthly" id="pricing-tab-7">
+                    <div class="row mb-d-30">
+                        <div class="col-lg-6">
+                            <div class="pricing-card">
+                                <div class="card-head">
+                                    <h6>Pla bàsic</h6>
+                                    <h2><span class="small-title">€</span><span class="big-txt" data-monthly='0'>
+                                            19</span><span class="month" data-monthly='/mes' data-yearly='/year'>/month</span></h2>
+                                    <p>Perfecte per empreses d'escala mitjana entrant al món digital</p>
+                                </div>
+                                <div class="card-content">
+                                    <ul class="pricing-list">
+                                        <li><span><i class="icon icon-check-2"></i></span>Nombre d'empleats Il·limitat</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Calendari interactiu d'organització</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Gestió de disponibilitat</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Perfil personalitzat</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Estadistiques personalitzades mensuals</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Registre de dades il·limitat</li>
+                                    </ul>
+                                    <div class="card-btn">
+                                        <a href="{{ path('signup') }}" class="btn btn--primary">Registra't gratis!</a>
+                                    </div>
+                                    <p>No es requereix tarjeta de crèdit</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="pricing-card active">
+                                <div class="card-head">
+                                    <h6>Pla professional</h6>
+                                    <span class="card-badge">Popular</span>
+                                    <h2><span class="small-title">€</span><span class="big-txt" data-monthly='29'
+                                                                                data-yearly='25'>29</span><span class="month" data-monthly='/mes' data-yearly='/year'>/month</span></h2>
+                                    <p>La versió més completa per aprofitar al màxim la plataforma</p>
+                                </div>
+                                <div class="card-content">
+                                    <ul class="pricing-list">
+                                        <li><span><i class="icon icon-check-2"></i></span>Inclou totes les caracteristiques del pla bàsic</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Nom personalitzat per la plataforma</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Sistema de permisos d'empleats (Supervisors i administradors)</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Notificacions push</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Missatgeria entre usuaris</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Sistema de puntuació d'empleats</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Rentabilització de la plataforma mitjançant anuncis</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Adició d'hores extres a la jornada laboral</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Generació i descàrrega de dades, inclosa una nòmina personal</li>
+                                        <li><span><i class="icon icon-check-2"></i></span>Comprovació de realització de operacions en temps real</li>
+                                    </ul>
+                                    <div class="card-btn">
+                                        <a class="btn btn--primary" style="color: #FFF !important">Contractar</a>
+                                    </div>
+                                    <p>Es requereix una tarjeta de crèdit</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="pricing-extra-info">
+                                <p><span>Tens dubtes?</span><a href="#contact">Contacta amb nosaltres</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
 
@@ -182,7 +260,7 @@
                                 <form action="">
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Introdueix el teu correu">
-                                        <button class="submit-btn">Vull rebre més informació</button>
+                                        <button class="submit-btn">Enviar</button>
                                     </div>
                                     <p class="form-text"><i class="icon icon-lock"></i>Les teves dades seran usades per contactar amb tu i res més.</p>
                                 </form>
@@ -248,6 +326,7 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
 <!-- JS -->
 {% block javascripts %}
