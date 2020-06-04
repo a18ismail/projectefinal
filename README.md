@@ -4,6 +4,8 @@ Aquesta aplicació ofereix una plataforma de gestió de tasques/operatives dirig
 Idea basada en un repte ofert pel concurs Metropolis FPLabs
 Projecte Final de DAW realitzat per Sonia Vargas i Ismail Ait.
 
+[En aquest fitxer trobaras la documentació completa d'aquest projecte](docs/documentacio_tecnica.md)
+
 # Instal·lació
 
 Per instal·lar aquest projecte en local:
@@ -11,7 +13,8 @@ Per instal·lar aquest projecte en local:
 1. Instal·lació de dependencies PHP/Symfony: `composer install`
 2. Instal·lació de dependencies JS/Webpack Encore: `npm install` / `yarn install`
 3. Generació de assets per visualitzar l'aplicació: `npm run dev` / `yarn encore dev`
-*Es recomanable utilitzar `yarn` com a gestionador de paquets
+
+Consulta la documentació per instruccions detallades.
 
 ## Instruccions per desplegar
 

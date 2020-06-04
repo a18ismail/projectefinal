@@ -7,19 +7,24 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore
-    // directory where compiled assets will be stored
-    .setOutputPath('public/build/')
-    // public path used by the web server to access the output path
-    .setPublicPath('/build')
-    // only needed for CDN's or sub-directory deploy
-    //.setManifestKeyPrefix('build/')
 
-    //PER PRODUCCIÓ
-    //En la majoria del casos l'aplicació será desplagada en un subdirectori d'un servidor
-    //En aquest cas cal sobrescriure la ruta del directori /build, on es troben tots els recursos
-    //Només cal descomentar les següents dues linies, i comentar la configuració anterior de setPublicPath
+    // Aquest es el directori on es generen els assets
+    .setOutputPath('public/build/')
+
+    // Aquest es el directori public on es publiquen els assets generats pel navegador/servidor web
+    .setPublicPath('/build')
+
+
+    //PER DESPLEGAR AN UN SERVIDOR WEB
+    //En la majoria del casos l'aplicació será desplagada en un subdirectori d'un servidor (per exemple /var/www/html)
+    //En aquest cas cal sobrescriure la ruta del directori public, on es troben tots els assets
+
+    //Per aquesta configuració cal descomentar les següents dues linies, comentar la configuració anterior de setPublicPath()
+    // i descomentar el bloc de codi al final d'aquest fitxer, que defineix una configuració d'enrutació per defecte
+
     //.setPublicPath('build')
     //.setManifestKeyPrefix('build/')
+
 
     /*
      * ENTRY CONFIG
@@ -30,6 +35,8 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
+
+    //Aquests son els punts d'entrada dels assets, defineixen els fitxers que es fan servir
     .addEntry('app', './assets/js/app.js')
     .addEntry('profile', './assets/js/profile.js')
     .addEntry('operations', './assets/js/operations.js')
@@ -42,8 +49,6 @@ Encore
     .addEntry('landing2', './assets/js/landing2.js')
     .addEntry('signin', './assets/js/signin.js')
     .addEntry('signup', './assets/js/signup.js')
-    //.addEntry('page1', './assets/js/page1.js')
-    //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
