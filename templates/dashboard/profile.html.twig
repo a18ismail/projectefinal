@@ -2,6 +2,10 @@
 
 {% block title %}Perfil - App{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
 {% block body %}
     <div class="wrapper">
         <!-- Top Navbar -->
@@ -39,7 +43,7 @@
                             <!-- Widget user -->
                             <div class="card card-widget widget-user">
                                 <div class="widget-user-header text-white"
-                                     style="background: url('{{ asset('./images/landing') }}') center center;">
+                                     style="background: url('{{ asset('./images/landing/ship.webp') }}') right;">
                                     <h3 class="widget-user-username text-right"> {{ employee.name }} </h3>
                                     <h5 class="widget-user-desc text-right"> {{ employee.surnames }} </h5>
                                 </div>
@@ -83,15 +87,9 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
-{#
-                    <div class="container-fluid mb-3">
-                        <div class="row d-flex justify-content-right">
-                            <strong><i class="fas fa-pencil-alt" data-toggle="modal" data-target="#myModal"></i> Editar perfil</strong>
-                        </div>
-                    </div>#}
 
                     <div class="d-flex mb-3 flex-row-reverse">
-                        <div class="p-2" data-toggle="modal" data-target="#myModal">
+                        <div style="border: rgba(13,65,233,0.46) solid 2px; border-radius: 20px; cursor: pointer;" class="p-2" data-toggle="modal" data-target="#myModal">
                             <strong><i class="fas fa-pencil-alt" ></i> Editar perfil</strong>
                         </div>
                     </div>
@@ -137,16 +135,22 @@
                             </p>
 
                             <hr>
-                            <strong><i class="fas fa-users"></i> Xarxes Socials</strong>
-                            <div>
-                                <a href="{{ employee.snsLinkedin }}" target= "_blank" class="icon-block">
-                                    <i class="fab fa-linkedin fa-3x"></i>
-                                </a>
-
-                                <a href="{{ employee.snsTwitter }}" target= "_blank" class="icon-block">
-                                    <i class="fab fa-twitter fa-3x"></i>
-                                </a>
+                            <strong>
+                                <i class="fas fa-users"></i> Xarxes Socials
+                            </strong>
+                            <div class="d-flex justify-content-end">
+                                <div>
+                                    <a href="{{ employee.snsLinkedin }}" target= "_blank" class="icon-block">
+                                        <i class="fab fa-linkedin fa-3x"></i>
+                                    </a>
+                                </div>
+                                <div class="ml-3">
+                                    <a href="{{ employee.snsTwitter }}" target= "_blank" class="icon-block">
+                                        <i class="fab fa-twitter fa-3x"></i>
+                                    </a>
+                                </div>
                             </div>
+
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -161,4 +165,8 @@
         {{ include('footers/footerDashboard.html.twig') }}
     </div>
     <!-- ./wrapper -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('profile') }}
 {% endblock %}
