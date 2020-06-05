@@ -10,6 +10,6 @@
 
 - Document: Manual d'Usuari [(Google drive)](https://docs.google.com/document/d/1_6vDyyJum24xqnkbB4BNXbFiyEh2Uitg-1b5YXdwHeI/edit?usp=sharing) [(PDF)](https://google.cat)
 
-- Dissenys inicials [(Carpeta a Google drive)](https://google.cat)
+- Dissenys inicials [(Carpeta a Google drive)](https://drive.google.com/drive/folders/1FnnE3TZOy3oZD14pK-EDVIsJeJx7tAuM?usp=sharing)
 
 - Pitch: [Video](https://google.cat) (Google drive)
