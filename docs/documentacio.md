@@ -12,4 +12,4 @@
 
 - Dissenys inicials [(Carpeta a Google drive)](https://drive.google.com/drive/folders/1FnnE3TZOy3oZD14pK-EDVIsJeJx7tAuM?usp=sharing)
 
-- Pitch: Video [(Google drive)](https://drive.google.com/file/d/15xZ_ZTPmVlElDgQPB9zEhIUBeyDQd-hC/view?usp=sharing) / [(fitxer MP4)](Pitch_Intrasea.mp4)
+- Pitch del projecte: Video [(Google drive)](https://drive.google.com/file/d/15xZ_ZTPmVlElDgQPB9zEhIUBeyDQd-hC/view?usp=sharing) / [(fitxer MP4)](Pitch_Intrasea.mp4)
