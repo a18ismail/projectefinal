@@ -7,13 +7,14 @@ Aquí trobarás la documentació técnica d'aquest projecte.
 Aquests son els programes o paquets necessaris per arrancar aquesta web (preferiblement Linux)
 
 - Pila LAMP (PHP 7.3, Apache2, MySQL Server)
-- PhpMyAdmin (preferible per visualitzar millor la BD)
+- PhpMyAdmin (pot ser qualsevol administrador de BDs)
 - Symfony (https://symfony.com/download)
 - Composer (https://getcomposer.org/download/)
 - Node (consulta la secció de [troubleshooting](FAQ.md) per instruccions detallades sobre la instal·lació)
 - Yarn (preferiblement, ja que NPM dona problemes en alguns casos amb Webpack Encore)
 
 Executa l'ordre `symfony check:requirements` al directori del projecte per comprobar que està preparat per continuar.
+Per més detalls sobre tots els components del projecte consulta [la presentació tècnica](documentacio.md).
 
 ### Arrancar en local
 
