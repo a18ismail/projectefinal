@@ -18,7 +18,7 @@
     "dependencies": {
         "@fullcalendar/list": "^4.4.0",
         "admin-lte": "^3.0",
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "jquery": "^3.5.1"
     }
 }
